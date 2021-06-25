@@ -24,6 +24,7 @@ class Document < ApplicationRecord
 
   def document_pdf_download
     key = document_pdf.key
+    puts "downloading document with key : #{key}"
     document_pdf.open(tmpdir: 'storage/') do |file| FileUtils.cp(file,'public/'.concat(key).concat('.pdf')) 
     end
 
