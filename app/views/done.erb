@@ -1,0 +1,5 @@
+<h2>You have successfully uploaded the following data</h2>
+<%= JSON.parse(params.to_json).to_s %>
+<% @params.each do |param| %>
+  <p><%= param %>
+<% end %>

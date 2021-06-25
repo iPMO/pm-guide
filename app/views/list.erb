@@ -1,0 +1,43 @@
+<% if @params.empty? %>
+  <h1>List of all Document</h1>
+  <table>
+   <tfoot>
+    <tr>
+     </td>
+    </tr>
+   </tfoot>
+   <tbody>
+    <ul>
+      <% Document.all.each do |d| %>
+        <% d.document_pdf_download %>
+        <% link = '/show/'.concat(d.document_pdf.key) %>
+        <%= link %>
+      <li>
+        <a href='<%= link %>'><%= d.read_attribute(:document_name) %></a>
+      </li>
+     <% end %>
+    </ul>
+   </tbody>
+  </table>
+<% else %>
+ <h1>List of Documents for Project <%= @params['project_name'] %></h1>
+ <table>
+  <tfoot>
+   <tr>
+    </td>
+   </tr>
+  </tfoot>
+  <tbody>
+   <ul>
+     <% Document.where(project_name: @params['project_name']).find_each do |d| %>
+       <% d.document_pdf_download %>
+       <% link = '/show/'.concat(d.document_pdf.key) %>
+       <%= link %>
+       <li>
+         <a href='<%= link %>'><%= d.read_attribute(:document_name)%>><%= d.read_attribute(:document_name) %></a>
+       </li>
+     <% end %>
+   </ul>
+ </tbody>
+ </table>
+ <% end %>

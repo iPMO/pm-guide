@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>iPMO</title>
+    <link rel="stylesheet" type="text/css" href="../assets/stylesheets/application.css">
+  </head>
+  <body>
+    <header class="main">
+      <h1><%= @page_title %></h1>
+    </header>
+    <section class="content">
+      <nav class="side_nav">
+       <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/upload">document upload</a></li>
+        <li><a href="/list">project list</a></li>
+        <li><a href="/download">bundle download</a></li>
+       </ul>
+      </nav>
+      <main class="main_text">
+        <%= yield %>
+      </main>
+    </section>
+  </body>
+</html>
+
+
