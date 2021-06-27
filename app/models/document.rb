@@ -36,4 +36,17 @@ class Document < ApplicationRecord
 
   end
 
+  def default_data_frame
+    data_frame = Daru::DataFrame.new(
+        {
+          'Pre' => ['0.0.z','0.1.z','0.2.z','0.3.z'],
+          'Initiation' => ['1.0.z','1.1.z','1.2.z','1.3.z'],
+          'Subsequent' => ['2.0.z','2.1.z','2.2.z','2.3.z'],
+          'Final' => ['3.0.z','3.1.z','3.2.z','3.3.z']
+           },
+           index: ['Corporate', 'Direction', 'Management', 'Delivery']
+    )
+    data_frame
+  end
+
 end

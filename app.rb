@@ -12,7 +12,7 @@ class IpMO < Sinatra::Base
   # get the index page
   get '/' do
     puts 'going home'
-    erb :index, :layout => :application
+    erb :details, :layout => :application
   end
 
   # show the upload document view 
@@ -62,6 +62,14 @@ class IpMO < Sinatra::Base
   get '/download' do
     puts 'going to create an download bundle for templates'
     erb :download, :layout => :application
+  end
+
+  # route for details of a certain project
+  get '/details/:project_name' do
+    @params = params
+    project = params['project_name']
+    puts "loading details/#{project}"
+    erb :details, :layout => :application
   end
 
   # ROUTES are OVER, here comes the HELPES
