@@ -88,7 +88,7 @@ class IpMO < Sinatra::Base
      document = Document.new
      document.write_attribute(:document_name, filename)
      document.write_attribute(:document_type, chunks[2])
-     document.write_attribute(:project_name, chunks[0])
+     document.write_attribute(:project_name, chunks[0].upcase!)
      document.write_attribute(:pm_standard, chunks[1])
      document.write_attribute(:process_step, get_version(filename))
      document.write_attribute(:document_version, 1000)

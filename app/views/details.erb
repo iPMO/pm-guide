@@ -19,13 +19,29 @@
 .tg
 .tg-7dw8{background-color:#38fff8;border-color:inherit;text-align:left;vertical-align:top}
 .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-med2{background-color:#38fff8}
+.tg .tg-fqpo{background-color:#cbcefb}
+.tg .tg-wvtg{background-color:#34cdf9}
+.tg .tg-3ope{background-color:#ffcb2f}
+.tg .tg-uhkr{background-color:#ffce93}
+.tg .tg-cxkv{background-color:#ffffff}
+.tg .tg-jhgd{background-color:#3166ff}
+.tg .tg-thls{background-color:#009901}
+.tg .tg-b286{background-color:#f56b00}
+.tg .tg-702o{background-color:#cdffff}
+.tg .tg-jl7l{background-color:#6665cd}
+.tg .tg-es88{background-color:#cfcfcf}
 </style>
 <!-- ruby helper //-->
-<% Document.default_data_frame %>
 <% if !params['project_name'].nil? %>
   <h1><%= "PRINCE2 Process Details View for #{params['project_name']} " %></h1>
+  <!-- Initialize the NON persistent Project Object and load with documents hash and data_frame //-->
+  <% @project = Project.new(params['project_name'].upcase!) %>
+  <!-- load with project data_frame //-->
+  <% @data_frame = @project.get_project_data_frame %>
 <% else %>
   <h1><%= "Welcome to the interactive Project Management guide !" %></h1>
+  <% @data_frame = Project.get_default_data_frame %>
 <% end %>
 
 <!-- Table //-->
@@ -37,54 +53,66 @@
 <colgroup span="2"></colgroup>
 <thead class="tgh">
  <tr>
-  <td rowspan="4"</td>
-  <th colspan="4" scope="colgroup">Project stages</th>
+  <td rowspan="5" class="tgh"></td>
+  <th colspan="5" scope="colgroup" class="tgh">Project stages</th>
  </tr>
  <tr>
-  <th class="tg-kusv">Pre-Project Stage (0.y)</th>
-  <th class="tg-0cjc">Initiation Stage (1.y)</th>
-  <th class="tg-ik58">Subsequent Delivery Stage (2.y)</th>
-  <th class="tg-7dw8">Final Delivery Stage (4.y)</th>
+  <th class="tg-031e">Pre-Project Stage</th>
+  <th class="tg-031e">Initiation Stage</th>
+  <th class="tg-031e">Subsequent Delivery Stage</th>
+  <th class="tg-031e"></th>
+  <th class="tg-031e">Final Delivery Stage</th>
  </tr>
 </thead>
 <tbody class="tgb">
   <tr>
-   <th scope="row" class="tg-y698">Corporate (x.0)</th>
-   <td class="tg-0pky"><%= data_frame['Pre'] %></td>
-   <td class="tg-0pky">1.0.z</td>
-   <td class="tg-0pky">2.0.z</td>
-   <td class="tg-0pky">3.0.z</td>
+   <th scope="row" class="tg-031e">Corporate</th>
+   <td class="tg-031e"><%= @data_frame['Pre']['Corporate'] %></td>
+   <td class="tg-031e"><%= @data_frame['Initiation']['Corporate'] %></td>
+   <td class="tg-031e"><%= @data_frame['Subsequent1']['Corporate'] %></td>
+   <td class="tg-031e"><%= @data_frame['Subsequent2']['Corporate'] %></td>
+   <td class="tg-031e"><%= @data_frame['Final']['Corporate'] %></td>
   </tr>
   <tr>
-   <th scope="row" class="tg-y698">Direction (x.1)</th>
-   <td class="tg-0pky">0.1.z </td>
-   <td class="tg-0pky">1.1.z</td>
-   <td class="tg-0pky">2.1.z</td>
-   <td class="tg-0pky">3.1.z</td>
+   <th scope="row" class="tg-031e">Direction</th>
+   <td class="tg-kusv"><%= @data_frame['Pre']['Direction'] %></td>
+   <td class="tg-jl7l"><%= @data_frame['Initiation']['Direction'] %></td>
+   <td class="tg-jl7l"><%= @data_frame['Subsequent1']['Direction'] %></td>
+   <td class="tg-jl7l"><%= @data_frame['Subsequent2']['Direction'] %></td>
+   <td class="tg-jl7l"><%= @data_frame['Final']['Direction'] %></td>
    </tr>
    <tr>
-    <th scope class="tg-y698">Management (x.2)</th>
-    <td class="tg-0pky">0.2.z </td>
-    <td class="tg-0pky">1.2.z</td>
-    <td class="tg-0pky">2.2.z</td>
-    <td class="tg-0pky">3.2.z</td>
+    <th rowspan="2" scope class="tg-031e">Management</th>
+    <td class="tg-kusv"><%= @data_frame['Pre']['Management1'] %></td>
+    <td class="tg-0cjc"><%= @data_frame['Initiation']['Management1'] %></td>
+    <td class="tg-ik58"><%= @data_frame['Subsequent1']['Management1'] %></td>
+    <td class="tg-031e^"><%= @data_frame['Subsequent2']['Management1'] %></td>
+    <td class="tg-7dw8"><%= @data_frame['Final']['Management1'] %></td>
    </tr>
    <tr>
-    <th scope="row" class="tg-y698">Delivery (x.3)</th>
-    <td class="tg-0pky">0.3.z </td>
-    <td class="tg-0pky">1.3.z</td>
-    <td class="tg-0pky">2.3.z</td>
-    <td class="tg-0pky">3.3.z</td>
+    <td class="tg-kusv"><%= @data_frame['Pre']['Management2'] %></td>
+    <td class="tg-0cjc"><%= @data_frame['Initiation']['Management2'] %></td>
+    <td class="tg-0cjc"><%= @data_frame['Subsequent1']['Management2'] %></td>
+    <td class="tg-0cjc"><%= @data_frame['Subsequent2']['Management2'] %></td>
+    <td class="tg-7dw8"><%= @data_frame['Final']['Management2'] %></td>
+   </tr>
+   <tr>
+    <th scope="row" class="tg-031e">Delivery</th>
+    <td class="tg-031e"><%= @data_frame['Pre']['Delivery'] %></td>
+    <td class="tg-031e"><%= @data_frame['Initiation']['Delivery'] %></td>
+    <td class="tg-es88"><%= @data_frame['Subsequent1']['Delivery'] %></td>
+    <td class="tg-es88"><%= @data_frame['Subsequent2']['Delivery'] %></td>
+    <td class="tg-031e"><%= @data_frame['Final']['Delivery'] %></td>
    </tr>
  </tbody>
  <tfoot class="tgf">
   <tr>
    <th>Version (x.y.z):</th>
-   <td colspan=4>x = Stage #; y = Hierachie Level #; z = Document #</td>
+   <td colspan=5>x = Stage #; y = Hierachie Level #; z = Document #</td>
   </tr>
   <tr>
    <th>Example</th>
-   <td colspan="4">0.0.1 = 1´st delivery (document) from Pre-Project Stage on Corporate Level
+   <td colspan="5">0.0.1 = 1´st delivery (document) from Pre-Project Stage on Corporate Level
   </tr>
  </tfoot>
  </table>
