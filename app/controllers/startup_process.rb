@@ -1,0 +1,4 @@
+
+class StartupProcess < Processes
+
+end

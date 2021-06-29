@@ -1,6 +1,6 @@
-require_relative '../app.rb'
 require 'rack/test'
 require 'rails_helper'
+require_relative '../app.rb'
 
 RSpec.describe 'Sinatra App' do
     include Rack::Test::Methods
@@ -35,4 +35,9 @@ RSpec.describe 'Sinatra App' do
 
         expect(last_response.body).to include('.pdf')
       end 
+
+      it 'loads the process instance class' do
+        process_startUP = StartupProcess.new()
+        expect(process_startUP).to be_nil
+      end
 end

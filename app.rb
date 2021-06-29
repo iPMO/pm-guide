@@ -1,6 +1,5 @@
 require 'rubygems'
 require 'sinatra/base'
-require_relative 'app/controllers/document_controller'
 
 
 class IpMO < Sinatra::Base
