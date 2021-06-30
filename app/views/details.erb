@@ -38,10 +38,10 @@
   <!-- Initialize the NON persistent Project Object and load with documents hash and data_frame //-->
   <% @project = Project.new(params['project_name'].upcase!) %>
   <!-- load with project data_frame //-->
-  <% @data_frame = @project.get_project_data_frame %>
+  <% @data_frame = @project.get_project_dataframe %>
 <% else %>
   <h1><%= "Welcome to the interactive Project Management guide !" %></h1>
-  <% @data_frame = Project.get_default_data_frame %>
+  <% @data_frame = Project.new(nil).default_dataframe %>
 <% end %>
 
 <!-- Table //-->
@@ -67,42 +67,42 @@
 <tbody class="tgb">
   <tr>
    <th scope="row" class="tg-031e">Corporate</th>
-   <td class="tg-031e"><%= @data_frame['Pre']['Corporate'] %></td>
-   <td class="tg-031e"><%= @data_frame['Initiation']['Corporate'] %></td>
-   <td class="tg-031e"><%= @data_frame['Subsequent1']['Corporate'] %></td>
-   <td class="tg-031e"><%= @data_frame['Subsequent2']['Corporate'] %></td>
-   <td class="tg-031e"><%= @data_frame['Final']['Corporate'] %></td>
+   <td class="tg-031e"><%= @data_frame[0][:corporate,0] %></td>
+   <td class="tg-031e"><%= @data_frame[1][:corporate,0] %></td>
+   <td class="tg-031e"><%= @data_frame[2][:corporate,0] %></td>
+   <td class="tg-031e"><%= @data_frame[3][:corporate,0] %></td>
+   <td class="tg-031e"><%= @data_frame[4][:corporate,0] %></td>
   </tr>
   <tr>
    <th scope="row" class="tg-031e">Direction</th>
-   <td class="tg-kusv"><%= @data_frame['Pre']['Direction'] %></td>
-   <td class="tg-jl7l"><%= @data_frame['Initiation']['Direction'] %></td>
-   <td class="tg-jl7l"><%= @data_frame['Subsequent1']['Direction'] %></td>
-   <td class="tg-jl7l"><%= @data_frame['Subsequent2']['Direction'] %></td>
-   <td class="tg-jl7l"><%= @data_frame['Final']['Direction'] %></td>
+   <td class="tg-kusv"><%= @data_frame[0][:direct,1] %></td>
+   <td class="tg-jl7l"><%= @data_frame[1][:direct,1] %></td>
+   <td class="tg-jl7l"><%= @data_frame[2][:direct,1] %></td>
+   <td class="tg-jl7l"><%= @data_frame[3][:direct,1] %></td>
+   <td class="tg-jl7l"><%= @data_frame[4][:direct,1] %></td>
    </tr>
    <tr>
     <th rowspan="2" scope class="tg-031e">Management</th>
-    <td class="tg-kusv"><%= @data_frame['Pre']['Management1'] %></td>
-    <td class="tg-0cjc"><%= @data_frame['Initiation']['Management1'] %></td>
-    <td class="tg-ik58"><%= @data_frame['Subsequent1']['Management1'] %></td>
-    <td class="tg-031e^"><%= @data_frame['Subsequent2']['Management1'] %></td>
-    <td class="tg-7dw8"><%= @data_frame['Final']['Management1'] %></td>
+    <td class="tg-kusv"><%= @data_frame[0][:manage,2] %></td>
+    <td class="tg-0cjc"><%= @data_frame[1][:manage,2] %></td>
+    <td class="tg-ik58"><%= @data_frame[2][:manage,2] %></td>
+    <td class="tg-031e^"><%= @data_frame[3][:manage,2] %></td>
+    <td class="tg-7dw8"><%= @data_frame[4][:manage,2] %></td>
    </tr>
    <tr>
-    <td class="tg-kusv"><%= @data_frame['Pre']['Management2'] %></td>
-    <td class="tg-0cjc"><%= @data_frame['Initiation']['Management2'] %></td>
-    <td class="tg-0cjc"><%= @data_frame['Subsequent1']['Management2'] %></td>
-    <td class="tg-0cjc"><%= @data_frame['Subsequent2']['Management2'] %></td>
-    <td class="tg-7dw8"><%= @data_frame['Final']['Management2'] %></td>
+    <td class="tg-kusv"><%= @data_frame[0][:manage,3] %></td>
+    <td class="tg-0cjc"><%= @data_frame[1][:manage,3] %></td>
+    <td class="tg-0cjc"><%= @data_frame[2][:manage,3] %></td>
+    <td class="tg-0cjc"><%= @data_frame[3][:manage,3] %></td>
+    <td class="tg-7dw8"><%= @data_frame[4][:manage,3] %></td>
    </tr>
    <tr>
     <th scope="row" class="tg-031e">Delivery</th>
-    <td class="tg-031e"><%= @data_frame['Pre']['Delivery'] %></td>
-    <td class="tg-031e"><%= @data_frame['Initiation']['Delivery'] %></td>
-    <td class="tg-es88"><%= @data_frame['Subsequent1']['Delivery'] %></td>
-    <td class="tg-es88"><%= @data_frame['Subsequent2']['Delivery'] %></td>
-    <td class="tg-031e"><%= @data_frame['Final']['Delivery'] %></td>
+    <td class="tg-031e"><%= @data_frame[0][:deliver,4] %></td>
+    <td class="tg-031e"><%= @data_frame[1][:deliver,4] %></td>
+    <td class="tg-es88"><%= @data_frame[2][:deliver,4] %></td>
+    <td class="tg-es88"><%= @data_frame[3][:deliver,4] %></td>
+    <td class="tg-031e"><%= @data_frame[4][:deliver,4] %></td>
    </tr>
  </tbody>
  <tfoot class="tgf">
