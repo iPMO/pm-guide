@@ -33,7 +33,7 @@
 .tg .tg-es88{background-color:#cfcfcf}
 </style>
 <!-- ruby helper //-->
-<% if !params['project_name'].nil? %>
+<% if params['project_name'] != nil %>
   <h1><%= "PRINCE2 Process Details View for #{params['project_name']} " %></h1>
   <!-- Initialize the NON persistent Project Object and load with documents hash and data_frame //-->
   <% @project = Project.new(params['project_name'].upcase!) %>
