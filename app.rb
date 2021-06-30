@@ -40,8 +40,7 @@ class IpMO < Sinatra::Base
   
   # route for listing the project with name :project
   get '/list/:project_name' do
-    puts 'goint to list the projects'
-    "listing details for project #{params['project_name']}"
+    puts "listing details for project #{params['project_name']}"
     check(params)
     @params = params
     erb :list, :layout => :application

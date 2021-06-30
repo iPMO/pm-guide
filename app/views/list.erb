@@ -29,7 +29,7 @@
   </tfoot>
   <tbody>
    <ul>
-     <% Document.where(project_name: @params['project_name']).find_each do |d| %>
+     <% Document.where(project_name: @params['project_name'].upcase!).find_each do |d| %>
        <% d.document_pdf_download %>
        <% link = '/show/'.concat(d.document_pdf.key) %>
        <%= link %>
