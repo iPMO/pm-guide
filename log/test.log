@@ -1057,3 +1057,5 @@ FOREIGN KEY ("blob_id")
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
   [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mDocument Load (34.6ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "IPMO"]]
+  [1m[36mDocument Load (2.0ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "IPMO"]]

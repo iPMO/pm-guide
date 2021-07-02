@@ -1,43 +1,19 @@
-<% if @params.empty? %>
-  <h1>List of all Document</h1>
-  <table>
-   <tfoot>
-    <tr>
-     </td>
-    </tr>
-   </tfoot>
-   <tbody>
-    <ul>
-      <% Document.all.each do |d| %>
-        <% d.document_pdf_download %>
-        <% link = '/show/'.concat(d.document_pdf.key) %>
-        <%= link %>
-      <li>
-        <a href='<%= link %>'><%= d.read_attribute(:document_name) %></a>
-      </li>
-     <% end %>
-    </ul>
-   </tbody>
-  </table>
-<% else %>
- <h1>List of Documents for Project <%= @params['project_name'] %></h1>
- <table>
-  <tfoot>
-   <tr>
-    </td>
-   </tr>
-  </tfoot>
-  <tbody>
-   <ul>
-     <% Document.where(project_name: @params['project_name'].upcase!).find_each do |d| %>
-       <% d.document_pdf_download %>
-       <% link = '/show/'.concat(d.document_pdf.key) %>
-       <%= link %>
-       <li>
-         <a href='<%= link %>'><%= d.read_attribute(:document_name)%>><%= d.read_attribute(:document_name) %></a>
-       </li>
-     <% end %>
+<h1>List of all projects</h1>
+<% @pHash = Hash.new %>
+<% Document.select('*').group('id,project_name').find_each{|d| @pHash.store(d.read_attribute(:project_name),d.read_attribute(:pm_standard))} %>
+<% @pHash.each do |key, value| %>
+  <% if key != nil then %>
+    <% @link= '/details/'.concat(key) %>
+  <% else next %>
+  <% end %>
+  <ul>
+    <li>
+    <a href='<%= @link %>'>
+      <%= key %>
+    </a>
+    </li>
+    <li>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<%= value %>
+   </li>
    </ul>
- </tbody>
- </table>
  <% end %>

@@ -11,7 +11,7 @@ class IpMO < Sinatra::Base
   # get the index page
   get '/' do
     puts 'going home'
-    erb :details, :layout => :application
+    redirect 'details/PRJ'
   end
 
   # show the upload document view 
@@ -46,9 +46,10 @@ class IpMO < Sinatra::Base
     erb :list, :layout => :application
   end
 
-  get '/show/:key' do
+  get '/show/:key/application/:content_type' do
     key = params['key']
-    puts "showing file with #{key}"
+    content_type = params['content_type']
+    puts "showing doc with #{params}"
     file_name = 'public/'.concat(key).concat('.pdf')
     file_name_static = "public/sample.pdf"
     link_file(params)
@@ -56,18 +57,44 @@ class IpMO < Sinatra::Base
     erb  :show, :layout => :application 
   end
 
-  # route for the download page
-  get '/download' do
-    puts 'going to create an download bundle for templates'
-    erb :download, :layout => :application
-  end
-
   # route for details of a certain project
   get '/details/:project_name' do
     @params = params
     project = params['project_name']
-    puts "loading details/#{project}"
+    puts "------- loading details/#{project}"
     erb :details, :layout => :application
+  end
+
+  get '/home/sinatra/code/pm-guide/public/pdf_logo.jpeg' do
+    File.read(File.join('public', 'pdf_logo.jpeg'))
+  end
+
+  get '/home/sinatra/code/pm-guide/public/letter.jpeg' do
+    File.read(File.join('public', 'letter.jpeg'))
+  end
+
+  get '/home/sinatra/code/pm-guide/public/word_logo.jpeg' do
+    File.read(File.join('public', 'word_logo.jpeg'))
+  end
+
+  get '/home/sinatra/code/pm-guide/public/doc_logo.jpeg' do
+    File.read(File.join('public', 'doc_logo.jpeg'))
+  end
+
+  get '/app/assets/stylesheets/application.css'  do
+    File.read(File.join('app','assets','stylesheets','application.css'))
+  end
+
+  get '/home/sinatra/code/pm-guide/public/application.css' do
+    File.read(File.join('public','application.css'))
+  end
+
+  get /\d\.\d/ do
+    erb :details,  :layout => :application
+  end
+
+  get %r{.*/stylesheets/application.css} do
+        redirect('app/assets/stylesheets/application.css')
   end
 
   # ROUTES are OVER, here comes the HELPES

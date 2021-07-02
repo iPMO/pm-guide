@@ -3,13 +3,16 @@
 .tg  {border-style:solid; border-collapse:collapse;border-spacing:0;width:100%;height:100%}
 .tgh  {border-style:solid; border-collapse:collapse;border-spacing:0;}
 .tgb  {border-style:solid; border-collapse:collapse;border-spacing:0;}
-.tgf  {border-style:solid; border-collapse:collapse;border-spacing:0;}
+.tgf  {border-style:solid; border-collapse:collapse;border-spacing:0; height: 25px}
 .tg td{border-style:solid;border-width:0px;font-family:Arial
-  sans-serif;font-size:14px;overflow:hidden;
+  sans-serif;font-size:14px;overflow:hidden; height: 75px;
      padding:10px 5px;word-break:normal;}
 .tg th{border-style:solid;border-width:0px;font-family:Arial,
        sans-serif;font-size:14px;font-weight:normal;
-          overflow:hidden;padding:10px 5px;word-break:normal;} .tg .tg-0cjc{background-color:#67fd9a;border-color:inherit;text-align:left;vertical-align:top}
+     overflow:hidden;padding:10px 5px;word-break:normal; height: 25px} 
+.tg 
+.tg-0cjc{background-color:#67fd9a;border-color:inherit;text-align:left;vertical-align:top} 
+.tg-0cjd{background-color:#67df9d;border-color:inherit;text-align:left;vertical-align:top}
 .tg
 .tg-kusv{background-color:#fffe65;border-color:inherit;text-align:left;vertical-align:top}
 .tg
@@ -33,15 +36,22 @@
 .tg .tg-es88{background-color:#cfcfcf}
 </style>
 <!-- ruby helper //-->
+<% @logo = String.new('pdf_').concat('logo.jpeg') %>
 <% if params['project_name'] != nil %>
   <h1><%= "PRINCE2 Process Details View for #{params['project_name']} " %></h1>
   <!-- Initialize the NON persistent Project Object and load with documents hash and data_frame //-->
-  <% @project = Project.new(params['project_name'].upcase!) %>
+  <% puts "******* params: #{params['project_name']}" %>
+  <% @project = Project.new(params['project_name']) %>
   <!-- load with project data_frame //-->
   <% @data_frame = @project.get_project_dataframe %>
+  <% @documents = @project.get_documents %>
+  <% @logo = String.new('word_').concat('logo.jpeg') if params['project_name'] == 'PRJ' %>
 <% else %>
   <h1><%= "Welcome to the interactive Project Management guide !" %></h1>
-  <% @data_frame = Project.new(nil).default_dataframe %>
+  <% @project = Project.new(nil)  %>
+  <% @data_frame = @project.default_dataframe %>
+  <% @documents = @project.create_default_dataframe_documents %>
+  <% @logo = String.new('doc_').concat('logo.jpeg') %>
 <% end %>
 
 <!-- Table //-->
@@ -67,42 +77,220 @@
 <tbody class="tgb">
   <tr>
    <th scope="row" class="tg-031e">Corporate</th>
-   <td class="tg-031e"><%= @data_frame[0][:corporate,0] %></td>
-   <td class="tg-031e"><%= @data_frame[1][:corporate,0] %></td>
-   <td class="tg-031e"><%= @data_frame[2][:corporate,0] %></td>
-   <td class="tg-031e"><%= @data_frame[3][:corporate,0] %></td>
-   <td class="tg-031e"><%= @data_frame[4][:corporate,0] %></td>
+   <td class="tg-031e">
+      <% if @data_frame[0][:corporate,0] != nil %>
+        <%  puts "data_frame ====> #{@data_frame[0][:corporate,0]}" %>
+       <%  puts @documents["#{@data_frame[0][:corporate,0]}"]%>
+      <a href="<%= @data_frame[0][:corporate,0] %>">
+        <img alt="failed to load" title='<%= @documents["#{@data_frame[0][:corporate,0]}"] %>' src="/home/sinatra/code/pm-guide/public/letter.jpeg" style="border:1px solid black" width="32" height="32">
+      </a>
+    <% else %>
+    <% end %>
+   </td>
+   <td class="tg-031e">
+     <% if @data_frame[1][:corporate,0] != nil %>
+      <a href="<%= @data_frame[1][:corporate,0] %>">
+        <img alt="failed to load" title='<%= @documents["#{@data_frame[1][:corporate,0]}"] %>' src="/home/sinatra/code/pm-guide/public/letter.jpeg" style="border:1px solid black" width="32" height="32">
+      </a>
+    <% else %>
+    <% end %>
+   </td>
+   <td class="tg-031e">
+    <% if @data_frame[2][:corporate,0] != nil %>
+     <a href="<%= @data_frame[2][:corporate,0] %>">
+       <img alt="failed to load" title='<%= @documents["#{@data_frame[2][:corporate,0]}"] %>' src="/home/sinatra/code/pm-guide/public/letter.jpeg" style="border:1px solid black" width="32" height="32">
+     </a>
+   <% else %>
+   <% end %>
+   </td>
+   <td class="tg-031e">
+    <% if @data_frame[3][:corporate,0] != nil %>
+     <a href="<%= @data_frame[3][:corporate,0] %>">
+       <img alt="failed to load" title='<%= @documents["#{@data_frame[3][:corporate,0]}"] %>' src="/home/sinatra/code/pm-guide/public/letter.jpeg" style="border:1px solid black" width="32" height="32">
+     </a>
+    <% else %>
+    <% end %>
+   </td>
+   <td class="tg-031e">
+    <% if @data_frame[4][:corporate,0] != nil %>
+     <a href="<%= @data_frame[4][:corporate,0] %>">
+       <img alt="failed to load" title='<%= @documents["#{@data_frame[4][:corporate,0]}"] %>' src="/home/sinatra/code/pm-guide/public/letter.jpeg" style="border:1px solid black" width="32" height="32">
+     </a>
+    <% else %>
+    <% end %>
+   </td>
   </tr>
   <tr>
    <th scope="row" class="tg-031e">Direction</th>
-   <td class="tg-kusv"><%= @data_frame[0][:direct,1] %></td>
-   <td class="tg-jl7l"><%= @data_frame[1][:direct,1] %></td>
-   <td class="tg-jl7l"><%= @data_frame[2][:direct,1] %></td>
-   <td class="tg-jl7l"><%= @data_frame[3][:direct,1] %></td>
-   <td class="tg-jl7l"><%= @data_frame[4][:direct,1] %></td>
+   <td class="tg-kusv">
+     <% if @data_frame[0][:direct,1] != nil %>
+       <a href="<%= @data_frame[0][:direct,1] %>">
+         <img alt="failed to load" title='<%= @documents["#{@data_frame[0][:direct,1]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+       </a>
+     <% else %>
+     <% end %>
+   </td>
+   <td class="tg-jl7l">
+    <% if @data_frame[1][:direct,1] != nil %>
+     <a href="<%= @data_frame[1][:direct,1] %>">
+       <img alt="failed to load" title='<%= @documents["#{@data_frame[1][:direct,1]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+     </a>
+    <% else %>
+    <% end %>
+   </td>
+   <td class="tg-jl7l">
+     <% if @data_frame[2][:direct,1] != nil %>
+       <a href="<%= @data_frame[2][:direct,1] %>">
+         <img alt="failed to load" title='<%= @documents["#{@data_frame[2][:direct,1]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+       </a>
+     <% else %>
+     <% end %>
+   </td>
+   <td class="tg-jl7l">
+     <% if @data_frame[3][:direct,1] != nil %>
+       <a href="<%= @data_frame[3][:direct,1] %>">
+         <img alt="failed to load" title='<%= @documents["#{@data_frame[3][:direct,1]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+       </a>
+     <% else %>
+     <% end %>
+   </td>
+   <td class="tg-jl7l">
+     <% if @data_frame[4][:direct,1] != nil %>
+      <a href="<%= @data_frame[4][:direct,1] %>">
+        <img alt="failed to load" title='<%= @documents["#{@data_frame[4][:direct,1]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+      </a>
+     <% else %>
+     <% end %>
+   </td>
    </tr>
    <tr>
     <th rowspan="2" scope class="tg-031e">Management</th>
-    <td class="tg-kusv"><%= @data_frame[0][:manage,2] %></td>
-    <td class="tg-0cjc"><%= @data_frame[1][:manage,2] %></td>
-    <td class="tg-ik58"><%= @data_frame[2][:manage,2] %></td>
-    <td class="tg-031e^"><%= @data_frame[3][:manage,2] %></td>
-    <td class="tg-7dw8"><%= @data_frame[4][:manage,2] %></td>
+    <td class="tg-kusv">
+      <% if @data_frame[0][:manage,2] != nil %>
+        <% @data_frame[0][:manage,2] %>
+         <a href="<%= @data_frame[0][:manage,2] %>">
+           <img alt="failed to load" title='<%= @documents["#{@data_frame[0][:manage,2]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+         </a>
+      <% else %>
+      <% end %>
+    </td>
+    <td class="tg-0cjc">
+      <% if @data_frame[1][:manage,2] != nil %>
+        <a href="<%= @data_frame[1][:manage,2] %>">
+          <img alt="failed to load" title='<%= @documents["#{@data_frame[1][:manage,2]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+        </a>
+       <% else %>
+       <% end %>
+    </td>
+    <td class="tg-ik58">
+      <% if @data_frame[2][:manage,2] != nil %>
+        <a href="<%= @data_frame[2][:manage,2] %>">
+          <img alt="failed to load" title='<%= @documents["#{@data_frame[2][:manage,2]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+        </a>
+      <% else %>
+      <% end %>
+    </td>
+    <td class="tg-031e^">
+      <% if @data_frame[3][:manage,2] != nil %>
+         <a href="<%= @data_frame[3][:manage,2] %>">
+           <img alt="failed to load" title='<%= @documents["#{@data_frame[3][:manage,2]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+         </a>
+      <% else %>
+      <% end %>
+    </td>
+    <td class="tg-7dw8">
+      <% if @data_frame[4][:manage,2] != nil %>
+         <a href="<%= @data_frame[4][:manage,2] %>">
+           <img alt="failed to load" title='<%= @documents["#{@data_frame[4][:manage,2]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+         </a>
+      <% else %>
+      <% end %>
+    </td>
    </tr>
    <tr>
-    <td class="tg-kusv"><%= @data_frame[0][:manage,3] %></td>
-    <td class="tg-0cjc"><%= @data_frame[1][:manage,3] %></td>
-    <td class="tg-0cjc"><%= @data_frame[2][:manage,3] %></td>
-    <td class="tg-0cjc"><%= @data_frame[3][:manage,3] %></td>
-    <td class="tg-7dw8"><%= @data_frame[4][:manage,3] %></td>
+     <td class="tg-kusv">
+       <% if @data_frame[0][:manage,3] != nil %>
+         <a href="<%= @data_frame[0][:manage,3] %>">
+           <img alt="failed to load" title='<%= @documents["#{@data_frame[0][:manage,3]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+         </a>
+       <% else %>
+       <% end %>
+     </td>
+     <td class="tg-0cjc">
+       <% if @data_frame[1][:manage,3] != nil %>
+         <a href="<%= @data_frame[1][:manage,3] %>">
+           <img alt="failed to load" title='<%= @documents["#{@data_frame[1][:manage,3]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+         </a>
+       <% else %>
+       <% end %>
+     </td>
+     <td class="tg-0cjd">
+       <% if @data_frame[2][:manage,3] != nil %>
+         <a href="<%= @data_frame[2][:manage,3] %>">
+           <img alt="failed to load" title='<%= @documents["#{@data_frame[2][:manage,3]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+         </a>
+       <% else %>
+       <% end %>
+     </td>
+     <td class="tg-0cjd">
+       <% if @data_frame[3][:manage,3] != nil %>
+         <a href="<%= @data_frame[3][:manage,3] %>">
+           <img alt="failed to load" title='<%= @documents["#{@data_frame[3][:manage,3]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+         </a>
+       <% else %>
+       <% end %>
+     </td>
+     <td class="tg-7dw8">
+       <% if @data_frame[4][:manage,3] != nil %>
+         <a href="<%= @data_frame[4][:manage,3] %>">
+           <img alt="failed to load" title='<%= @documents["#{@data_frame[4][:manage,3]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+         </a>
+       <% else %>
+       <% end %>
+     </td>
    </tr>
    <tr>
     <th scope="row" class="tg-031e">Delivery</th>
-    <td class="tg-031e"><%= @data_frame[0][:deliver,4] %></td>
-    <td class="tg-031e"><%= @data_frame[1][:deliver,4] %></td>
-    <td class="tg-es88"><%= @data_frame[2][:deliver,4] %></td>
-    <td class="tg-es88"><%= @data_frame[3][:deliver,4] %></td>
-    <td class="tg-031e"><%= @data_frame[4][:deliver,4] %></td>
+    <td class="tg-031e">
+      <% if @data_frame[0][:deliver,4] != nil %>
+        <a href="<%= @data_frame[0][:deliver,4] %>">
+          <img alt="failed to load" title='<%= @documents["#{@data_frame[0][:deliver,4]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+        </a>
+      <% else %>
+      <% end %>
+    </td>
+    <td class="tg-031e">
+      <% if @data_frame[1][:deliver,4] != nil %>
+        <a href="<%= @data_frame[1][:deliver,4] %>">
+          <img alt="failed to load" title='<%= @documents["#{@data_frame[1][:deliver,4]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+        </a>
+      <% else %>
+      <% end %>
+    </td>
+    <td class="tg-es88">
+      <% if @data_frame[2][:deliver,4] != nil %>
+          <a href="<%= @data_frame[2][:deliver,4] %>">
+            <img alt="failed to load" title='<%= @documents["#{@data_frame[2][:deliver,4]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+          </a>
+      <% else %>
+      <% end %>
+    </td>
+    <td class="tg-es88">
+      <% if @data_frame[3][:deliver,4] != nil %>
+          <a href="<%= @data_frame[3][:deliver,4] %>">
+            <img alt="failed to load" title='<%= @documents["#{@data_frame[3][:deliver,4]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+          </a>
+      <% else %>
+      <% end %>
+    </td>
+    <td class="tg-031e">
+      <% if @data_frame[4][:deliver,4] != nil %>
+          <a href="<%= @data_frame[4][:deliver,4] %>">
+            <img alt="failed to load" title='<%= @documents["#{@data_frame[4][:deliver,4]}"] %>' src="/home/sinatra/code/pm-guide/public/<%= @logo %>" style="border:1px solid black" width="32" height="32">
+          </a>
+      <% else %>
+      <% end %>
+    </td>
    </tr>
  </tbody>
  <tfoot class="tgf">
