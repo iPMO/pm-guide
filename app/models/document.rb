@@ -23,9 +23,14 @@ class Document < ApplicationRecord
   end
 
   def document_pdf_download
+    extension = nil
     key = document_pdf.key
+    content_type = document_pdf.content_type
+    if content_type == "application/pdf" then extension = '.pdf'
+    else extension = '.docx'
+    end
     puts "downloading document with key : #{key}"
-    document_pdf.open(tmpdir: 'storage/') do |file| FileUtils.cp(file,'public/'.concat(key).concat('.pdf')) 
+    document_pdf.open(tmpdir: 'storage/') do |file| FileUtils.cp(file,'public/'.concat(key).concat(extension)) 
     end
 
     #send_file(

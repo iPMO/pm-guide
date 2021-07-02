@@ -47,13 +47,17 @@ class IpMO < Sinatra::Base
   end
 
   get '/show/:key/application/:content_type' do
-    key = params['key']
-    content_type = params['content_type']
-    puts "showing doc with #{params}"
-    file_name = 'public/'.concat(key).concat('.pdf')
-    file_name_static = "public/sample.pdf"
-    link_file(params)
-    @params = params
+   key = params['key']
+   content_type = params['content_type']
+   if content_type == 'pdf' 
+    then extension = '.pdf'
+    else extension = ".docx"
+   end
+   params['extension'] = extension
+   puts "showing doc with #{params}"
+   file_name = 'public/'.concat(key).concat()
+   link_file(params)
+   @params = params
     erb  :show, :layout => :application 
   end
 
@@ -163,14 +167,15 @@ class IpMO < Sinatra::Base
   end
  
   def link_file(params) 
-    name = params['key'].concat('.pdf')
+    extension = params['extension']
+    name = params['key'].concat(extension)
     file_name_path = "#{Rails.root}/public/#{name}"
-    puts "link_file is #{name}"
+    puts "link_file with params #{params}"
     send_file(
       file_name_path,
          filename: "#{name}",
          disposition: 'inline',
-         type: "application/pdf"
+         type: "#{extension}"
      )
     FileUtils.chmod 0755, file_name_path.to_s
   end
