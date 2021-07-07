@@ -10,30 +10,14 @@
 .tg th{border-style:solid;border-width:0px;font-family:Arial,
        sans-serif;font-size:14px;font-weight:normal;
      overflow:hidden;padding:10px 5px;word-break:normal; height: 25px} 
-.tg 
-.tg-0cjc{background-color:#67fd9a;border-color:inherit;text-align:left;vertical-align:top} 
-.tg-0cjd{background-color:#67df9d;border-color:inherit;text-align:left;vertical-align:top}
-.tg
-.tg-kusv{background-color:#fffe65;border-color:inherit;text-align:left;vertical-align:top}
-.tg
-.tg-y698{background-color:#efefef;border-color:inherit;text-align:left;vertical-align:top}
-.tg
-.tg-ik58{background-color:#ffcb2f;border-color:inherit;text-align:left;vertical-align:top}
-.tg
-.tg-7dw8{background-color:#38fff8;border-color:inherit;text-align:left;vertical-align:top}
-.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
-.tg .tg-med2{background-color:#38fff8}
-.tg .tg-fqpo{background-color:#cbcefb}
-.tg .tg-wvtg{background-color:#34cdf9}
-.tg .tg-3ope{background-color:#ffcb2f}
-.tg .tg-uhkr{background-color:#ffce93}
-.tg .tg-cxkv{background-color:#ffffff}
-.tg .tg-jhgd{background-color:#3166ff}
-.tg .tg-thls{background-color:#009901}
-.tg .tg-b286{background-color:#f56b00}
-.tg .tg-702o{background-color:#cdffff}
-.tg .tg-jl7l{background-color:#6665cd}
-.tg .tg-es88{background-color:#cfcfcf}
+.tg-0cjc{background-color:#67fd9a;border-color:inherit;text-align:left;vertical-align:top; border-style:solid} 
+.tg-0cjd{background-color:#67df9d;border-color:black;text-align:left;vertical-align:top; border-style:solid}
+.tg-kusv{background-color:#fffe65;border-color:black;text-align:left;vertical-align:top; border-style:solid}
+.tg-ik58{background-color:#ffcb2f;border-color:black;text-align:left;vertical-align:top; border-style:solid}
+.tg-7dw8{background-color:#38fff8;border-color:black;text-align:left;vertical-align:top; border-style:solid}
+.tg-jhgd{background-color:#3166ff}
+.tg-jl7l{background-color:#6665cd}
+.tg-es88{background-color:#cfcfcf}
 </style>
 <!-- ruby helper //-->
 <% @logo = String.new('pdf_').concat('logo.jpeg') %>
@@ -67,27 +51,23 @@
     <col span="2"></col>
     <col span="3"></col>
     <col span="2"></col>
- </colgroup>
+  </colgroup>
 
 <thead class="tgh">
  <tr>
   <td rowspan="5" class="tgh"></td>
-  <th colspan="9" scope="colgroup" class="tgh"><h1>Project stage</h1></th>
+  <th colspan="9" scope="col" class="tgh"><h1>Project stage</h1></th>
  </tr>
  <tr>
-  <th class="tg-031e" scope="col">Pre-Project Stage</th>
-  <th class="tg-031e" scope="col"></th>
-  <th class="tg-031e" scope="col">Initiation Stage</th>
-  <th class="tg-031e" scope="col"></th>
-  <th class="tg-031e" scope="col">Subsequent Delivery Stage</th>
-  <th class="tg-031e" scope="col"></th>
-  <th class="tg-031e" scope="col"></th>
-  <th class="tg-031e" scope="col">Final Delivery Stage</th>
+  <th class="tg-031e" scope="col" colspan="2"><h3>Pre-Project</h3></th>
+  <th class="tg-031e" scope="col" colspan="2"><h3>Initiation</h3></th>
+  <th class="tg-031e" scope="col" colspan="3"><h3>Subsequent Delivery</h3></th>
+  <th class="tg-031e" scope="col" colspan="2"><h3>Final Delivery</h3></th>
  </tr>
 </thead>
 <tbody class="tgb">
   <tr>
-   <th scope="row" class="tg-031e">Corporate</th>
+    <th scope="row" class="tg-031e"><h3>Corporate</h3></th>
    <td class="tg-031e">
       <% if @data_frame[0][:corporate,0] != nil %>
         <%  puts "data_frame ====> #{@data_frame[0][:corporate,0]}" %>
@@ -133,7 +113,7 @@
    <td class="tg-031e">
     <% if @data_frame[5][:corporate,0] != nil %>
      <a href="<%= @data_frame[5][:corporate,0] %>" target="_blank">
-       <img alt="failed to load" title='<%= @documents["#{@data_frame[4][:corporate,0]}"] %>' src="/home/sinatra/code/pm-guide/public/letter.jpeg" style="border:1px solid black" width="32" height="32">
+       <img alt="failed to load" title='<%= @documents["#{@data_frame[5][:corporate,0]}"] %>' src="/home/sinatra/code/pm-guide/public/letter.jpeg" style="border:1px solid black" width="32" height="32">
      </a>
     <% else %>
     <% end %>
@@ -141,7 +121,7 @@
    <td class="tg-031e">
     <% if @data_frame[6][:corporate,0] != nil %>
      <a href="<%= @data_frame[6][:corporate,0] %>" target="_blank">
-      <img alt="failed to load" title='<%= @documents["#{@data_frame[4][:corporate,0]}"] %>' src="/home/sinatra/code/pm-guide/public/letter.jpeg" style="border:1px solid black" width="32" height="32">
+      <img alt="failed to load" title='<%= @documents["#{@data_frame[6][:corporate,0]}"] %>' src="/home/sinatra/code/pm-guide/public/letter.jpeg" style="border:1px solid black" width="32" height="32">
      </a>
     <% else %>
     <% end %>
@@ -149,23 +129,22 @@
    <td class="tg-031e">
     <% if @data_frame[7][:corporate,0] != nil %>
      <a href="<%= @data_frame[7][:corporate,0] %>" target="_blank">
-      <img alt="failed to load" title='<%= @documents["#{@data_frame[4][:corporate,0]}"] %>' src="/home/sinatra/code/pm-guide/public/letter.jpeg" style="border:1px solid black" width="32" height="32">
+      <img alt="failed to load" title='<%= @documents["#{@data_frame[7][:corporate,0]}"] %>' src="/home/sinatra/code/pm-guide/public/letter.jpeg" style="border:1px solid black" width="32" height="32">
      </a>
     <% else %>
     <% end %>
    </td>
-  </tr>
   <td class="tg-031e">
    <% if @data_frame[8][:corporate,0] != nil %>
     <a href="<%= @data_frame[8][:corporate,0] %>" target="_blank">
-     <img alt="failed to load" title='<%= @documents["#{@data_frame[4][:corporate,0]}"] %>' src="/home/sinatra/code/pm-guide/public/letter.jpeg" style="border:1px solid black" width="32" height="32">
+     <img alt="failed to load" title='<%= @documents["#{@data_frame[8][:corporate,0]}"] %>' src="/home/sinatra/code/pm-guide/public/letter.jpeg" style="border:1px solid black" width="32" height="32">
     </a>
    <% else %>
    <% end %>
    </td>
   </tr>
   <tr>
-   <th scope="row" class="tg-031e">Direction</th>
+    <th scope="row" class="tg-031e"><h3>Direction</h3></th>
    <td class="tg-kusv">
      <% if @data_frame[0][:direct,1] != nil %>
        <a href="<%= @data_frame[0][:direct,1] %>" target="_blank">
@@ -240,7 +219,7 @@
    </td>
    </tr>
    <tr>
-    <th rowspan="6" scope class="tg-031e">Management</th>
+     <th rowspan="6" scope="row" class="tg-031e"><h3>Management</h3></th>
     <td class="tg-kusv">
       <% if @data_frame[0][:manage,2] != nil %>
          <a href="<%= @data_frame[0][:manage,2] %>" target="_blank">
@@ -684,7 +663,7 @@
    </td>
    </tr>
    <tr>
-    <th scope="row" class="tg-031e">Delivery</th>
+     <th scope="row" class="tg-031e"><h3>Delivery</h3></th>
     <td class="tg-031e">
       <% if @data_frame[0][:deliver,8] != nil %>
         <a href="<%= @data_frame[0][:deliver,8] %>" target="_blank">
@@ -760,17 +739,17 @@
    </tr>
  </tbody>
  <tfoot class="tgf">
-  <tr>
-    <th colspan="10"><h1>Process-color-code</h1></th>
-  </tr>
-  <tr>
-    <td colspan="2" class="tg-kusv"><b>Starting Up a Project</b></td>
-    <td colspan="3" class="tg-jl7l"><b>Directing a Project</b></td>
-    <td class="tg-1cjc"><b>Initiating a Projet</b></td>
-    <td class="tg-0cjd"><b>Controlling a Stage</b></td>
-    <td class="tg-es88"><b>Managing Product Delivery</b></td>
-    <td class="tg-ik58"><b>Managing a Stage Boundary</td>
-    <td class="tg-7dw8"><b>Closing a Project</b></td>
-  </tr>
  </tfoot>
+ <table>
+  <tr>
+  </tr>
+  <tr>
+    <td class="tg-kusv" style="border-style:solid;border-width:2px"><b>&nbsp;Starting Up a Project&nbsp;</b></td>
+    <td class="tg-jl7l" style="border-style:solid;border-width:2px"><b>&nbsp;Directing a Project&nbsp;</b></td>
+    <td class="tg-0cjc" style="border-style:solid;border-width:2px"><b>&nbsp;Initiating a Project&nbsp;</b></td>
+    <td class="tg-0cjd" style="border-style:solid;border-width:2px"><b>&nbsp;Controlling a Stage&nbsp;</b></td>
+    <td class="tg-es88" style="border-style:solid;border-width:2px"><b>&nbsp;Managing Product Delivery&nbsp;</b></td>
+    <td class="tg-ik58" style="border-style:solid;border-width:2px"><b>&nbsp;Managing a Stage Boundary&nbsp;</td>
+    <td class="tg-7dw8" style="border-style:solid;border-width:2px"><b>&nbsp;Closing a Project&nbsp;</b></td>
+  </tr>
  </table>
