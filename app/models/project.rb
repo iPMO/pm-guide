@@ -15,23 +15,35 @@ class Project
     [:direct,1],
     [:manage,2],
     [:manage,3],
-    [:deliver,4]
+    [:manage,4],
+    [:manage,5],
+    [:manage,6],
+    [:manage,7],
+    [:deliver,8]
    ]
 
    @multi_index = Daru::MultiIndex.from_tuples(@tuples)
 
-   @vector_pre = [0.0,0.1,0.2,0.3,nil]
-   @vector_init =[1.0,1.1,1.2,1.3,nil]
-   @vector_sub1 =[2.0,2.1,2.2,2.3,2.4]
-   @vector_sub2 =[3.0,3.1,nil,3.3,3.4]
-   @vector_final=[4.0,4.1,4.2,4.3,nil]
+   @vector_pre0 = ['0.0.2','0.1.2','0.2.z','0.3.1','0.4.z','0.5.1','0.6.z','0.7.z',nil]
+   @vector_pre1 = ['1.0.2','1.1.z','1.2.z','1.3.z','1.4.2','1.5.z','1.6.2','1.7.z',nil]
+   @vector_init2= ['2.0.2','2.1.z',nil,'2.3.z','2.4.z','2.5.z',nil,nil,nil]
+   @vector_init3= ['3.0.2','3.1.z',nil,'3.3.z','3.4.z','3.5.z',nil,nil,nil]
+   @vector_sub4 = ['4.0.2','4.1.z','4.2.z','4.3.z','4.4.z','4.5.z','4.6.z','4.7.z','4.8.z']
+   @vector_sub5 = ['5.0.2','5.1.z','5.2.z','5.3.z','5.4.z','5.5.z','5.6.z','5.7.z','5.8.z']
+   @vector_sub6 = ['6.0.2','6.1.z',nil,nil,nil,'6.5.z','6.6.z','6.7.z','6.8.z']
+   @vector_fina1= ['7.0.2','7.1.z',nil,'7.3.z','7.4.z','7.5.z','7.6.z','7.7.z',nil]
+   @vector_fina2= ['8.0.2','8.1.z','8.2.z','8.3.z','8.4.z','8.5.z','8.6.z','8.7.z',nil]
 
    @order_mi = Daru::MultiIndex.from_tuples([
     [:pre,0],
-    [:initiation,1],
-    [:subsequent,2],
-    [:subsequent,3],
-    [:final,4]
+    [:pre,1],
+    [:initiation,2],
+    [:initiation,3],
+    [:subsequent,4],
+    [:subsequent,5],
+    [:subsequent,6],
+    [:final,7],
+    [:final,8]
     ])
 
    create_default_dataframe
@@ -68,8 +80,16 @@ class Project
      puts "processing #{@documents}"
      @documents.each {|key, value|  
        arrY = value.split(/:/)
-       arr = arrY[1].split(/\./) 
-       puts "array = #{arr.to_s}"
+       if arrY != nil then
+        arr = arrY[1].split(/\./) 
+        if arr[2] !='z' then
+          puts "array = #{arr.to_s}"
+        else
+         next
+        end
+       else
+        next
+       end
        @project_dataframe[arr[0].to_i][arr[1].to_i] = key 
     }
     else
@@ -79,17 +99,11 @@ class Project
   end
 
   def create_default_dataframe
-    puts "tuples are #{get_tuples}"
-    puts "vector_pre = #{get_vector_pre}"
-   @default_dataframe = Daru::DataFrame.new([@vector_pre, @vector_init, @vector_sub1, @vector_sub2, @vector_final], order: @order_mi, index: @multi_index)
+   @default_dataframe = Daru::DataFrame.new([@vector_pre0,@vector_pre1,@vector_init2,@vector_init3,@vector_sub4,@vector_sub5,@vector_sub6,@vector_fina1,@vector_fina2], order: @order_mi, index: @multi_index)
   end
 
   def get_tuples
    @tuples
-  end
-
-  def get_vector_pre
-   @vector_pre
   end
 
   def get_documents
@@ -98,7 +112,7 @@ class Project
   end
 
   def create_default_dataframe_documents
-    @one = @vector_pre+@vector_init+@vector_sub1+@vector_sub2+@vector_final
+    @one = @vector_pre0+@vector_pre1+@vector_init2+@vector_init3+@vector_sub4+@vector_sub5+@vector_sub6+@vector_fina1+@vector_fina2
     @oHash = Hash.new
     @one.each{|i| @oHash.store(i,i)}
     @oHash
