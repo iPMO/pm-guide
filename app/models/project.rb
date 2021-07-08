@@ -81,16 +81,27 @@ class Project
      @documents.each {|key, value|  
        arrY = value.split(/:/)
        if arrY != nil then
-        arr = arrY[1].split(/\./) 
+        version = arrY[1]
+        arr = version.split(/\./) 
+        puts "version is #{version}"
         if arr[2] !='z' then
-          puts "array = #{arr.to_s}"
+          for j in 0..8
+           for i in 0..8
+             puts @default_dataframe[j][i]
+             if @default_dataframe[j][i] == version 
+               then 
+                puts "found @ #{j} : #{i} going to put #{key}"
+                @project_dataframe[j][i] = key 
+             else @project_dataframe[j][i] = nil 
+             end
+           end
+          end
         else
          next
         end
        else
         next
        end
-       @project_dataframe[arr[0].to_i][arr[1].to_i] = key 
     }
     else
       @project_dataframe = @default_dataframe
