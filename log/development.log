@@ -16260,3 +16260,477 @@ Scoped order is ignored, it's forced to be batch order.
   [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 21], ["LIMIT", 1]]
   ↳ app/models/document.rb:27:in `document_pdf_download'
 [36m  Disk Storage (20.9ms) [0m[34mDownloaded file from key: 8dqx3yrmgo3aqll4rjtfs33j37o0[0m
+  [1m[36mDocument Load (18.6ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  ↳ app/models/project.rb:55:in `initialize'
+  [1m[36mDocument Load (1.6ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  ↳ app/models/project.rb:55:in `initialize'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Create (78.5ms)[0m  [1m[32mINSERT INTO "documents" ("document_name", "project_name", "pm_standard", "document_type", "process_step", "document_version", "j_document", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["document_name", "PRJ INTERN Beschlussvorlage v0.0.2.docx"], ["project_name", "PRJ"], ["pm_standard", "INTERN"], ["document_type", "Beschlussvorlage"], ["process_step", "0.0.2"], ["document_version", "1000"], ["j_document", "{\"document_pdf\":{\"filename\":\"PRJ INTERN Beschlussvorlage v0.0.2.docx\",\"type\":\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\"name\":\"document_pdf\",\"tempfile\":\"#\\u003cFile:0x00007ffff4043160\\u003e\",\"head\":\"Content-Disposition: form-data; name=\\\"document_pdf\\\"; filename=\\\"PRJ INTERN Beschlussvorlage v0.0.2.docx\\\"\\r\\nContent-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document\\r\\n\"}}"], ["created_at", "2021-07-08 08:58:39.221070"], ["updated_at", "2021-07-08 08:58:39.221070"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Load (54.7ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 22], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Create (20.9ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["key", "9grqspkgl4fwdgzauuja1qht7hly"], ["filename", "PRJ INTERN Beschlussvorlage v0.0.2.docx-2021-07-08 10:58:38 +0200"], ["content_type", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 22074], ["checksum", "ugFCnwsm5DCR/olN9m5mAQ=="], ["created_at", "2021-07-08 08:58:39.742533"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Attachment Create (19.9ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "document_pdf"], ["record_type", "Document"], ["record_id", 22], ["blob_id", 22], ["created_at", "2021-07-08 08:58:39.768688"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Update (1.3ms)[0m  [1m[33mUPDATE "documents" SET "updated_at" = $1 WHERE "documents"."id" = $2[0m  [["updated_at", "2021-07-08 08:58:39.792332"], ["id", 22]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (19.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+[36m  Disk Storage (37.3ms) [0m[32mUploaded file to key: 9grqspkgl4fwdgzauuja1qht7hly (checksum: ugFCnwsm5DCR/olN9m5mAQ==)[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Update (1.0ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = $1 WHERE "active_storage_blobs"."id" = $2[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 22]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (2.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Create (3.2ms)[0m  [1m[32mINSERT INTO "documents" ("document_name", "project_name", "pm_standard", "document_type", "process_step", "document_version", "j_document", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["document_name", "PRJ INTERN Informationsvorlage v01.2.docx"], ["project_name", "PRJ"], ["pm_standard", "INTERN"], ["document_type", "Informationsvorlage"], ["process_step", "1.2"], ["document_version", "1000"], ["j_document", "{\"document_pdf\":{\"filename\":\"PRJ INTERN Informationsvorlage v01.2.docx\",\"type\":\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\"name\":\"document_pdf\",\"tempfile\":\"#\\u003cFile:0x00007f4cd80256d0\\u003e\",\"head\":\"Content-Disposition: form-data; name=\\\"document_pdf\\\"; filename=\\\"PRJ INTERN Informationsvorlage v01.2.docx\\\"\\r\\nContent-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document\\r\\n\"}}"], ["created_at", "2021-07-08 08:58:54.341491"], ["updated_at", "2021-07-08 08:58:54.341491"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Load (4.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 23], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Create (1.3ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["key", "gxvfavffd22musq363foucvd3dn4"], ["filename", "PRJ INTERN Informationsvorlage v01.2.docx-2021-07-08 10:58:54 +0200"], ["content_type", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 21844], ["checksum", "/7fCV9L12xBVnt/BK4iQnA=="], ["created_at", "2021-07-08 08:58:54.368660"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Attachment Create (2.8ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "document_pdf"], ["record_type", "Document"], ["record_id", 23], ["blob_id", 23], ["created_at", "2021-07-08 08:58:54.376049"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Update (1.5ms)[0m  [1m[33mUPDATE "documents" SET "updated_at" = $1 WHERE "documents"."id" = $2[0m  [["updated_at", "2021-07-08 08:58:54.383621"], ["id", 23]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (20.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+[36m  Disk Storage (40.9ms) [0m[32mUploaded file to key: gxvfavffd22musq363foucvd3dn4 (checksum: /7fCV9L12xBVnt/BK4iQnA==)[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Update (1.0ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = $1 WHERE "active_storage_blobs"."id" = $2[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 23]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (1.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Load (1.8ms)[0m  [1m[34mSELECT "documents".* FROM "documents" ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app.rb:138:in `check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (2.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 22], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (0.8ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 23], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mDocument Load (1.7ms)[0m  [1m[34mSELECT * FROM "documents" GROUP BY id,project_name ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/views/list.erb:3:in `__tilt_61600'
+  [1m[36mDocument Load (1.9ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  ↳ app/models/project.rb:55:in `initialize'
+  [1m[36mActiveStorage::Attachment Load (0.8ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 22], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 22], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (26.3ms) [0m[34mDownloaded file from key: 9grqspkgl4fwdgzauuja1qht7hly[0m
+  [1m[36mActiveStorage::Attachment Load (1.1ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 23], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.7ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 23], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (2.0ms) [0m[34mDownloaded file from key: gxvfavffd22musq363foucvd3dn4[0m
+  [1m[36mDocument Load (1.4ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  ↳ app/models/project.rb:55:in `initialize'
+  [1m[36mActiveStorage::Attachment Load (0.9ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 22], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (1.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 22], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (15.9ms) [0m[34mDownloaded file from key: 9grqspkgl4fwdgzauuja1qht7hly[0m
+  [1m[36mActiveStorage::Attachment Load (1.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 23], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (1.0ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 23], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (3.0ms) [0m[34mDownloaded file from key: gxvfavffd22musq363foucvd3dn4[0m
+  [1m[36mDocument Load (52.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  ↳ app/models/project.rb:55:in `initialize'
+  [1m[36mActiveStorage::Attachment Load (67.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 22], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (51.8ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 22], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (25.0ms) [0m[34mDownloaded file from key: 9grqspkgl4fwdgzauuja1qht7hly[0m
+  [1m[36mActiveStorage::Attachment Load (0.9ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 23], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (1.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 23], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (1.9ms) [0m[34mDownloaded file from key: gxvfavffd22musq363foucvd3dn4[0m
+  [1m[36mDocument Load (11.4ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "NIL"]]
+  [1m[36mDocument Load (1.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  ↳ app/models/project.rb:55:in `initialize'
+  [1m[36mDocument Load (0.7ms)[0m  [1m[34mSELECT "documents".* FROM "documents" ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app.rb:138:in `check_document_pdf'
+  [1m[36mDocument Load (1.0ms)[0m  [1m[34mSELECT * FROM "documents" GROUP BY id,project_name ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/views/list.erb:3:in `__tilt_62900'
+  [1m[36mDocument Load (1.0ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  ↳ app/models/project.rb:55:in `initialize'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Create (10.6ms)[0m  [1m[32mINSERT INTO "documents" ("document_name", "project_name", "pm_standard", "document_type", "process_step", "document_version", "j_document", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["document_name", "PRJ INTERN Beschlussvorlage v0.0.docx"], ["project_name", "PRJ"], ["pm_standard", "INTERN"], ["document_type", "Beschlussvorlage"], ["process_step", "0.0"], ["document_version", "1000"], ["j_document", "{\"document_pdf\":{\"filename\":\"PRJ INTERN Beschlussvorlage v0.0.docx\",\"type\":\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\"name\":\"document_pdf\",\"tempfile\":\"#\\u003cFile:0x00007ffff65c4768\\u003e\",\"head\":\"Content-Disposition: form-data; name=\\\"document_pdf\\\"; filename=\\\"PRJ INTERN Beschlussvorlage v0.0.docx\\\"\\r\\nContent-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document\\r\\n\"}}"], ["created_at", "2021-07-08 12:14:15.853816"], ["updated_at", "2021-07-08 12:14:15.853816"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Load (18.6ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Create (1.1ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["key", "jmoicmsozio0e8as7q8216r0tnsd"], ["filename", "PRJ INTERN Beschlussvorlage v0.0.docx-2021-07-08 14:14:15 +0200"], ["content_type", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 22074], ["checksum", "ugFCnwsm5DCR/olN9m5mAQ=="], ["created_at", "2021-07-08 12:14:15.909261"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Attachment Create (1.0ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "document_pdf"], ["record_type", "Document"], ["record_id", 24], ["blob_id", 24], ["created_at", "2021-07-08 12:14:15.913030"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Update (0.9ms)[0m  [1m[33mUPDATE "documents" SET "updated_at" = $1 WHERE "documents"."id" = $2[0m  [["updated_at", "2021-07-08 12:14:15.916159"], ["id", 24]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (9.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+[36m  Disk Storage (20.9ms) [0m[32mUploaded file to key: jmoicmsozio0e8as7q8216r0tnsd (checksum: ugFCnwsm5DCR/olN9m5mAQ==)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Update (0.5ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = $1 WHERE "active_storage_blobs"."id" = $2[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 24]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Load (1.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app.rb:138:in `check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (1.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mDocument Load (0.7ms)[0m  [1m[34mSELECT * FROM "documents" GROUP BY id,project_name ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/views/list.erb:3:in `__tilt_61600'
+  [1m[36mDocument Load (1.4ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  ↳ app/models/project.rb:55:in `initialize'
+  [1m[36mActiveStorage::Attachment Load (0.7ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (11.5ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Create (0.6ms)[0m  [1m[32mINSERT INTO "documents" ("document_name", "project_name", "pm_standard", "document_type", "process_step", "document_version", "j_document", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["document_name", "PRJ INTERN Informationsvorlage v0.1.docx"], ["project_name", "PRJ"], ["pm_standard", "INTERN"], ["document_type", "Informationsvorlage"], ["process_step", "0.1"], ["document_version", "1000"], ["j_document", "{\"document_pdf\":{\"filename\":\"PRJ INTERN Informationsvorlage v0.1.docx\",\"type\":\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\"name\":\"document_pdf\",\"tempfile\":\"#\\u003cFile:0x00007f2a5835c940\\u003e\",\"head\":\"Content-Disposition: form-data; name=\\\"document_pdf\\\"; filename=\\\"PRJ INTERN Informationsvorlage v0.1.docx\\\"\\r\\nContent-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document\\r\\n\"}}"], ["created_at", "2021-07-08 12:14:31.386130"], ["updated_at", "2021-07-08 12:14:31.386130"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Create (0.6ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["key", "hvnrfnx1u0n5gm1rhi3ynzxead59"], ["filename", "PRJ INTERN Informationsvorlage v0.1.docx-2021-07-08 14:14:31 +0200"], ["content_type", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 21844], ["checksum", "/7fCV9L12xBVnt/BK4iQnA=="], ["created_at", "2021-07-08 12:14:31.393876"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Attachment Create (0.7ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "document_pdf"], ["record_type", "Document"], ["record_id", 25], ["blob_id", 25], ["created_at", "2021-07-08 12:14:31.396360"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Update (0.6ms)[0m  [1m[33mUPDATE "documents" SET "updated_at" = $1 WHERE "documents"."id" = $2[0m  [["updated_at", "2021-07-08 12:14:31.398790"], ["id", 25]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (11.0ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+[36m  Disk Storage (17.8ms) [0m[32mUploaded file to key: hvnrfnx1u0n5gm1rhi3ynzxead59 (checksum: /7fCV9L12xBVnt/BK4iQnA==)[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Update (0.4ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = $1 WHERE "active_storage_blobs"."id" = $2[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 25]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Load (1.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app.rb:138:in `check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mDocument Load (1.1ms)[0m  [1m[34mSELECT * FROM "documents" GROUP BY id,project_name ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/views/list.erb:3:in `__tilt_61600'
+  [1m[36mDocument Load (0.8ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  ↳ app/models/project.rb:55:in `initialize'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (9.0ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (1.5ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+  [1m[36mDocument Load (0.9ms)[0m  [1m[34mSELECT "documents".* FROM "documents" ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app.rb:138:in `check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (1.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mDocument Load (1.0ms)[0m  [1m[34mSELECT * FROM "documents" GROUP BY id,project_name ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/views/list.erb:3:in `__tilt_63040'
+  [1m[36mDocument Load (0.8ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  ↳ app/models/project.rb:55:in `initialize'
+  [1m[36mActiveStorage::Attachment Load (0.7ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (11.4ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (1.0ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+  [1m[36mDocument Load (0.7ms)[0m  [1m[34mSELECT "documents".* FROM "documents" ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app.rb:138:in `check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mDocument Load (0.6ms)[0m  [1m[34mSELECT * FROM "documents" GROUP BY id,project_name ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/views/list.erb:3:in `__tilt_63120'
+  [1m[36mDocument Load (0.6ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  ↳ app/models/project.rb:55:in `initialize'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (4.9ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (1.2ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+  [1m[36mDocument Load (1.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  [1m[36mActiveStorage::Attachment Load (1.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (1.0ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+[36m  Disk Storage (15.6ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.8ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+[36m  Disk Storage (10.9ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+  [1m[36mDocument Load (23.5ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  [1m[36mActiveStorage::Attachment Load (35.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (27.6ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+[36m  Disk Storage (18.5ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+[36m  Disk Storage (8.1ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+  [1m[36mDocument Load (1.5ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  [1m[36mActiveStorage::Attachment Load (1.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (1.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+[36m  Disk Storage (15.8ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (1.0ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+[36m  Disk Storage (11.3ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+  [1m[36mDocument Load (1.4ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  [1m[36mActiveStorage::Attachment Load (1.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (1.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+[36m  Disk Storage (20.5ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+[36m  Disk Storage (10.6ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+  [1m[36mDocument Load (1.6ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  [1m[36mActiveStorage::Attachment Load (1.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (1.0ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+[36m  Disk Storage (16.4ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+  [1m[36mActiveStorage::Attachment Load (1.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+[36m  Disk Storage (10.9ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+  [1m[36mDocument Load (1.2ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  [1m[36mActiveStorage::Attachment Load (1.7ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.9ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+[36m  Disk Storage (16.0ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+[36m  Disk Storage (10.4ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+  [1m[36mDocument Load (1.1ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  [1m[36mActiveStorage::Attachment Load (1.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (1.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+[36m  Disk Storage (16.1ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+  [1m[36mActiveStorage::Attachment Load (0.8ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+[36m  Disk Storage (10.8ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+  [1m[36mDocument Load (1.6ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  [1m[36mActiveStorage::Attachment Load (1.2ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (1.0ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+[36m  Disk Storage (16.1ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+  [1m[36mActiveStorage::Attachment Load (0.7ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+[36m  Disk Storage (11.2ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+  [1m[36mDocument Load (1.0ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  ↳ app/models/project.rb:55:in `initialize'
+  [1m[36mDocument Load (1.7ms)[0m  [1m[34mSELECT "documents".* FROM "documents" ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app.rb:138:in `check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (0.8ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (2.0ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Attachment Load (11.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mDocument Load (1.9ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  ↳ app/models/project.rb:55:in `initialize'
+  [1m[36mDocument Load (2.2ms)[0m  [1m[34mSELECT * FROM "documents" GROUP BY id,project_name ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/views/list.erb:3:in `__tilt_62240'
+  [1m[36mActiveStorage::Attachment Load (3.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.8ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (8.2ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (23.5ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+[36m  Disk Storage (26.3ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (10.4ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+[36m  Disk Storage (12.5ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+  [1m[36mDocument Load (0.9ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  ↳ app/models/project.rb:55:in `initialize'
+  [1m[36mActiveStorage::Attachment Load (0.9ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.9ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (11.2ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (1.0ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Create (1.1ms)[0m  [1m[32mINSERT INTO "documents" ("document_name", "project_name", "pm_standard", "document_type", "process_step", "document_version", "j_document", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["document_name", "PRJ PRINCE22017 DailyLog v0.3.docx"], ["project_name", "PRJ"], ["pm_standard", "PRINCE22017"], ["document_type", "DailyLog"], ["process_step", "0.3"], ["document_version", "1000"], ["j_document", "{\"document_pdf\":{\"filename\":\"PRJ PRINCE22017 DailyLog v0.3.docx\",\"type\":\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\"name\":\"document_pdf\",\"tempfile\":\"#\\u003cFile:0x00007fc8504847f0\\u003e\",\"head\":\"Content-Disposition: form-data; name=\\\"document_pdf\\\"; filename=\\\"PRJ PRINCE22017 DailyLog v0.3.docx\\\"\\r\\nContent-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document\\r\\n\"}}"], ["created_at", "2021-07-08 12:57:13.086520"], ["updated_at", "2021-07-08 12:57:13.086520"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Load (1.0ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 26], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Create (0.8ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["key", "oqekz5uf5ixosvah2qyx9mz60tnx"], ["filename", "PRJ PRINCE22017 DailyLog v0.3.docx-2021-07-08 14:57:13 +0200"], ["content_type", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 49891], ["checksum", "JlEVY2Nh5MIPT0a67FHOjA=="], ["created_at", "2021-07-08 12:57:13.100887"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Attachment Create (1.3ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "document_pdf"], ["record_type", "Document"], ["record_id", 26], ["blob_id", 26], ["created_at", "2021-07-08 12:57:13.103518"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Update (0.5ms)[0m  [1m[33mUPDATE "documents" SET "updated_at" = $1 WHERE "documents"."id" = $2[0m  [["updated_at", "2021-07-08 12:57:13.106323"], ["id", 26]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (19.3ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+[36m  Disk Storage (13.3ms) [0m[32mUploaded file to key: oqekz5uf5ixosvah2qyx9mz60tnx (checksum: JlEVY2Nh5MIPT0a67FHOjA==)[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Update (0.5ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = $1 WHERE "active_storage_blobs"."id" = $2[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 26]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Create (0.7ms)[0m  [1m[32mINSERT INTO "documents" ("document_name", "project_name", "pm_standard", "document_type", "process_step", "document_version", "j_document", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["document_name", "PRJ PRINCE22017 InitiationStagePlan v1.6.docx"], ["project_name", "PRJ"], ["pm_standard", "PRINCE22017"], ["document_type", "InitiationStagePlan"], ["process_step", "1.6"], ["document_version", "1000"], ["j_document", "{\"document_pdf\":{\"filename\":\"PRJ PRINCE22017 InitiationStagePlan v1.6.docx\",\"type\":\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\"name\":\"document_pdf\",\"tempfile\":\"#\\u003cFile:0x00007fc860534140\\u003e\",\"head\":\"Content-Disposition: form-data; name=\\\"document_pdf\\\"; filename=\\\"PRJ PRINCE22017 InitiationStagePlan v1.6.docx\\\"\\r\\nContent-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document\\r\\n\"}}"], ["created_at", "2021-07-08 12:57:21.186100"], ["updated_at", "2021-07-08 12:57:21.186100"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Load (0.7ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 27], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Create (0.7ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["key", "i6obsz5o5qsh0bwjgt0lmljxv6nv"], ["filename", "PRJ PRINCE22017 InitiationStagePlan v1.6.docx-2021-07-08 14:57:21 +0200"], ["content_type", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 83483], ["checksum", "L7J9IlQrkk4cmT2j3wn12A=="], ["created_at", "2021-07-08 12:57:21.193953"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Attachment Create (1.0ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "document_pdf"], ["record_type", "Document"], ["record_id", 27], ["blob_id", 27], ["created_at", "2021-07-08 12:57:21.196479"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Update (0.6ms)[0m  [1m[33mUPDATE "documents" SET "updated_at" = $1 WHERE "documents"."id" = $2[0m  [["updated_at", "2021-07-08 12:57:21.199105"], ["id", 27]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (17.8ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+[36m  Disk Storage (13.5ms) [0m[32mUploaded file to key: i6obsz5o5qsh0bwjgt0lmljxv6nv (checksum: L7J9IlQrkk4cmT2j3wn12A==)[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Update (0.9ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = $1 WHERE "active_storage_blobs"."id" = $2[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 27]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Create (0.5ms)[0m  [1m[32mINSERT INTO "documents" ("document_name", "project_name", "pm_standard", "document_type", "process_step", "document_version", "j_document", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["document_name", "PRJ PRINCE22017 LessonsLog v0.5.docx"], ["project_name", "PRJ"], ["pm_standard", "PRINCE22017"], ["document_type", "LessonsLog"], ["process_step", "0.5"], ["document_version", "1000"], ["j_document", "{\"document_pdf\":{\"filename\":\"PRJ PRINCE22017 LessonsLog v0.5.docx\",\"type\":\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\"name\":\"document_pdf\",\"tempfile\":\"#\\u003cFile:0x00007fc85068fab8\\u003e\",\"head\":\"Content-Disposition: form-data; name=\\\"document_pdf\\\"; filename=\\\"PRJ PRINCE22017 LessonsLog v0.5.docx\\\"\\r\\nContent-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document\\r\\n\"}}"], ["created_at", "2021-07-08 12:57:29.099466"], ["updated_at", "2021-07-08 12:57:29.099466"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Load (0.8ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 28], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Create (0.4ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["key", "2ffo85eqwqqear2cmgz1h7rexrxs"], ["filename", "PRJ PRINCE22017 LessonsLog v0.5.docx-2021-07-08 14:57:29 +0200"], ["content_type", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 51637], ["checksum", "ixkTcEk0edKfBRmxIQlBnw=="], ["created_at", "2021-07-08 12:57:29.107850"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Attachment Create (0.6ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "document_pdf"], ["record_type", "Document"], ["record_id", 28], ["blob_id", 28], ["created_at", "2021-07-08 12:57:29.110084"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Update (0.5ms)[0m  [1m[33mUPDATE "documents" SET "updated_at" = $1 WHERE "documents"."id" = $2[0m  [["updated_at", "2021-07-08 12:57:29.111988"], ["id", 28]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+[36m  Disk Storage (13.2ms) [0m[32mUploaded file to key: 2ffo85eqwqqear2cmgz1h7rexrxs (checksum: ixkTcEk0edKfBRmxIQlBnw==)[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Update (0.5ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = $1 WHERE "active_storage_blobs"."id" = $2[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 28]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Create (0.5ms)[0m  [1m[32mINSERT INTO "documents" ("document_name", "project_name", "pm_standard", "document_type", "process_step", "document_version", "j_document", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["document_name", "PRJ PRINCE22017 ProjectBrief v1.4.docx"], ["project_name", "PRJ"], ["pm_standard", "PRINCE22017"], ["document_type", "ProjectBrief"], ["process_step", "1.4"], ["document_version", "1000"], ["j_document", "{\"document_pdf\":{\"filename\":\"PRJ PRINCE22017 ProjectBrief v1.4.docx\",\"type\":\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\"name\":\"document_pdf\",\"tempfile\":\"#\\u003cFile:0x00007fc8606a57e0\\u003e\",\"head\":\"Content-Disposition: form-data; name=\\\"document_pdf\\\"; filename=\\\"PRJ PRINCE22017 ProjectBrief v1.4.docx\\\"\\r\\nContent-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document\\r\\n\"}}"], ["created_at", "2021-07-08 12:57:37.994566"], ["updated_at", "2021-07-08 12:57:37.994566"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Load (0.7ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 29], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Create (0.5ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["key", "isbagkwhu7i444yoggzy7vxw023b"], ["filename", "PRJ PRINCE22017 ProjectBrief v1.4.docx-2021-07-08 14:57:37 +0200"], ["content_type", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 52521], ["checksum", "XFL7Q8nfwH3IfcICG0fE5g=="], ["created_at", "2021-07-08 12:57:38.000419"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Attachment Create (0.6ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "document_pdf"], ["record_type", "Document"], ["record_id", 29], ["blob_id", 29], ["created_at", "2021-07-08 12:57:38.002477"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Update (0.5ms)[0m  [1m[33mUPDATE "documents" SET "updated_at" = $1 WHERE "documents"."id" = $2[0m  [["updated_at", "2021-07-08 12:57:38.005207"], ["id", 29]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (9.5ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+[36m  Disk Storage (12.8ms) [0m[32mUploaded file to key: isbagkwhu7i444yoggzy7vxw023b (checksum: XFL7Q8nfwH3IfcICG0fE5g==)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Update (0.5ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = $1 WHERE "active_storage_blobs"."id" = $2[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 29]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Create (0.8ms)[0m  [1m[32mINSERT INTO "documents" ("document_name", "project_name", "pm_standard", "document_type", "process_step", "document_version", "j_document", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["document_name", "PRJ PRINCE22017 ProjectProductDescription v1.2.docx"], ["project_name", "PRJ"], ["pm_standard", "PRINCE22017"], ["document_type", "ProjectProductDescription"], ["process_step", "1.2"], ["document_version", "1000"], ["j_document", "{\"document_pdf\":{\"filename\":\"PRJ PRINCE22017 ProjectProductDescription v1.2.docx\",\"type\":\"application/vnd.openxmlformats-officedocument.wordprocessingml.document\",\"name\":\"document_pdf\",\"tempfile\":\"#\\u003cFile:0x00007fc8582ff788\\u003e\",\"head\":\"Content-Disposition: form-data; name=\\\"document_pdf\\\"; filename=\\\"PRJ PRINCE22017 ProjectProductDescription v1.2.docx\\\"\\r\\nContent-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document\\r\\n\"}}"], ["created_at", "2021-07-08 12:57:44.076910"], ["updated_at", "2021-07-08 12:57:44.076910"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Load (0.7ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" INNER JOIN "active_storage_attachments" ON "active_storage_blobs"."id" = "active_storage_attachments"."blob_id" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 30], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Create (0.7ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "service_name", "byte_size", "checksum", "created_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING "id"[0m  [["key", "u9iw949uqlp0pb79bsoy4ouvr1ga"], ["filename", "PRJ PRINCE22017 ProjectProductDescription v1.2.docx-2021-07-08 14:57:44 +0200"], ["content_type", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"], ["metadata", "{\"identified\":true}"], ["service_name", "local"], ["byte_size", 54228], ["checksum", "fv9MPT0vaMTN8odQimp0rA=="], ["created_at", "2021-07-08 12:57:44.085362"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Attachment Create (1.2ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "document_pdf"], ["record_type", "Document"], ["record_id", 30], ["blob_id", 30], ["created_at", "2021-07-08 12:57:44.087896"]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Update (0.5ms)[0m  [1m[33mUPDATE "documents" SET "updated_at" = $1 WHERE "documents"."id" = $2[0m  [["updated_at", "2021-07-08 12:57:44.090550"], ["id", 30]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (9.1ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+[36m  Disk Storage (12.7ms) [0m[32mUploaded file to key: u9iw949uqlp0pb79bsoy4ouvr1ga (checksum: fv9MPT0vaMTN8odQimp0rA==)[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mActiveStorage::Blob Update (0.5ms)[0m  [1m[33mUPDATE "active_storage_blobs" SET "metadata" = $1 WHERE "active_storage_blobs"."id" = $2[0m  [["metadata", "{\"identified\":true,\"analyzed\":true}"], ["id", 30]]
+  ↳ app.rb:126:in `new_document'
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app.rb:126:in `new_document'
+  [1m[36mDocument Load (0.6ms)[0m  [1m[34mSELECT "documents".* FROM "documents" ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app.rb:138:in `check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 26], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 27], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (0.6ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 28], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 29], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 30], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app.rb:139:in `block in check_document_pdf'
+  [1m[36mDocument Load (0.9ms)[0m  [1m[34mSELECT * FROM "documents" GROUP BY id,project_name ORDER BY "documents"."id" ASC LIMIT $1[0m  [["LIMIT", 1000]]
+  ↳ app/views/list.erb:3:in `__tilt_62480'
+  [1m[36mDocument Load (0.7ms)[0m  [1m[34mSELECT "documents".* FROM "documents" WHERE "documents"."project_name" = $1[0m  [["project_name", "PRJ"]]
+  ↳ app/models/project.rb:55:in `initialize'
+  [1m[36mActiveStorage::Attachment Load (0.8ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 29], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (1.1ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (8.4ms) [0m[34mDownloaded file from key: isbagkwhu7i444yoggzy7vxw023b[0m
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 24], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.9ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (1.1ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 25], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (1.4ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 26], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.8ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (1.2ms) [0m[34mDownloaded file from key: oqekz5uf5ixosvah2qyx9mz60tnx[0m
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 27], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.4ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (1.6ms) [0m[34mDownloaded file from key: i6obsz5o5qsh0bwjgt0lmljxv6nv[0m
+  [1m[36mActiveStorage::Attachment Load (0.5ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 28], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.5ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (1.5ms) [0m[34mDownloaded file from key: 2ffo85eqwqqear2cmgz1h7rexrxs[0m
+  [1m[36mActiveStorage::Attachment Load (0.3ms)[0m  [1m[34mSELECT "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = $1 AND "active_storage_attachments"."record_type" = $2 AND "active_storage_attachments"."name" = $3 LIMIT $4[0m  [["record_id", 30], ["record_type", "Document"], ["name", "document_pdf"], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+  [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 30], ["LIMIT", 1]]
+  ↳ app/models/document.rb:27:in `document_pdf_download'
+[36m  Disk Storage (1.9ms) [0m[34mDownloaded file from key: u9iw949uqlp0pb79bsoy4ouvr1ga[0m
