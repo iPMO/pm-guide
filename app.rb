@@ -11,13 +11,11 @@ class IpMO < Sinatra::Base
  
   # get the index page
   get '/' do
-    puts 'going home'
     redirect 'details/PRJ'
   end
 
   # show the upload document view 
   get '/upload' do
-    puts 'going to upload' 
     erb :upload, :layout => :application
   end
 
@@ -64,10 +62,15 @@ class IpMO < Sinatra::Base
 
   # route for details of a certain project
   get '/details/:project_name' do
+   logger.info "#{ActiveRecord::Base.connected?}"
+   if ActiveRecord::Base.connected? then
     @params = params
     project = params['project_name']
     logger.info "------- loading details/#{project}"
     erb :details, :layout => :application
+   else
+     erb :error
+   end
   end
 
   get '/home/sinatra/code/pm-guide/public/pdf_logo.jpeg' do
