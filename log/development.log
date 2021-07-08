@@ -16734,3 +16734,224 @@ Scoped order is ignored, it's forced to be batch order.
   [1m[36mActiveStorage::Blob Load (0.6ms)[0m  [1m[34mSELECT "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = $1 LIMIT $2[0m  [["id", 30], ["LIMIT", 1]]
   ↳ app/models/document.rb:27:in `document_pdf_download'
 [36m  Disk Storage (1.9ms) [0m[34mDownloaded file from key: u9iw949uqlp0pb79bsoy4ouvr1ga[0m
+[36m  Disk Storage (64.9ms) [0m[34mDownloaded file from key: isbagkwhu7i444yoggzy7vxw023b[0m
+[36m  Disk Storage (55.6ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+[36m  Disk Storage (35.7ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+[36m  Disk Storage (25.9ms) [0m[34mDownloaded file from key: oqekz5uf5ixosvah2qyx9mz60tnx[0m
+[36m  Disk Storage (23.5ms) [0m[34mDownloaded file from key: i6obsz5o5qsh0bwjgt0lmljxv6nv[0m
+[36m  Disk Storage (23.8ms) [0m[34mDownloaded file from key: 2ffo85eqwqqear2cmgz1h7rexrxs[0m
+[36m  Disk Storage (24.4ms) [0m[34mDownloaded file from key: u9iw949uqlp0pb79bsoy4ouvr1ga[0m
+[36m  Disk Storage (44.9ms) [0m[34mDownloaded file from key: isbagkwhu7i444yoggzy7vxw023b[0m
+[36m  Disk Storage (24.7ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+[36m  Disk Storage (44.6ms) [0m[34mDownloaded file from key: isbagkwhu7i444yoggzy7vxw023b[0m
+[36m  Disk Storage (22.8ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+[36m  Disk Storage (1.9ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+[36m  Disk Storage (2.0ms) [0m[34mDownloaded file from key: oqekz5uf5ixosvah2qyx9mz60tnx[0m
+[36m  Disk Storage (3.9ms) [0m[34mDownloaded file from key: i6obsz5o5qsh0bwjgt0lmljxv6nv[0m
+[36m  Disk Storage (3.2ms) [0m[34mDownloaded file from key: 2ffo85eqwqqear2cmgz1h7rexrxs[0m
+[36m  Disk Storage (2.7ms) [0m[34mDownloaded file from key: u9iw949uqlp0pb79bsoy4ouvr1ga[0m
+[36m  Disk Storage (45.6ms) [0m[34mDownloaded file from key: isbagkwhu7i444yoggzy7vxw023b[0m
+[36m  Disk Storage (25.2ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+[36m  Disk Storage (2.3ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+[36m  Disk Storage (2.5ms) [0m[34mDownloaded file from key: oqekz5uf5ixosvah2qyx9mz60tnx[0m
+[36m  Disk Storage (2.6ms) [0m[34mDownloaded file from key: i6obsz5o5qsh0bwjgt0lmljxv6nv[0m
+[36m  Disk Storage (2.5ms) [0m[34mDownloaded file from key: 2ffo85eqwqqear2cmgz1h7rexrxs[0m
+[36m  Disk Storage (2.5ms) [0m[34mDownloaded file from key: u9iw949uqlp0pb79bsoy4ouvr1ga[0m
+[36m  Disk Storage (24.0ms) [0m[34mDownloaded file from key: isbagkwhu7i444yoggzy7vxw023b[0m
+[36m  Disk Storage (2.3ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+[36m  Disk Storage (2.4ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+[36m  Disk Storage (2.7ms) [0m[34mDownloaded file from key: oqekz5uf5ixosvah2qyx9mz60tnx[0m
+[36m  Disk Storage (2.6ms) [0m[34mDownloaded file from key: i6obsz5o5qsh0bwjgt0lmljxv6nv[0m
+[36m  Disk Storage (2.9ms) [0m[34mDownloaded file from key: 2ffo85eqwqqear2cmgz1h7rexrxs[0m
+[36m  Disk Storage (2.3ms) [0m[34mDownloaded file from key: u9iw949uqlp0pb79bsoy4ouvr1ga[0m
+[36m  Disk Storage (46.1ms) [0m[34mDownloaded file from key: isbagkwhu7i444yoggzy7vxw023b[0m
+[36m  Disk Storage (23.7ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+[36m  Disk Storage (1.9ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+[36m  Disk Storage (2.1ms) [0m[34mDownloaded file from key: oqekz5uf5ixosvah2qyx9mz60tnx[0m
+[36m  Disk Storage (2.9ms) [0m[34mDownloaded file from key: i6obsz5o5qsh0bwjgt0lmljxv6nv[0m
+[36m  Disk Storage (2.0ms) [0m[34mDownloaded file from key: 2ffo85eqwqqear2cmgz1h7rexrxs[0m
+[36m  Disk Storage (2.2ms) [0m[34mDownloaded file from key: u9iw949uqlp0pb79bsoy4ouvr1ga[0m
+[36m  Disk Storage (44.7ms) [0m[34mDownloaded file from key: isbagkwhu7i444yoggzy7vxw023b[0m
+[36m  Disk Storage (23.4ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+[36m  Disk Storage (2.3ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+[36m  Disk Storage (2.5ms) [0m[34mDownloaded file from key: oqekz5uf5ixosvah2qyx9mz60tnx[0m
+[36m  Disk Storage (2.6ms) [0m[34mDownloaded file from key: i6obsz5o5qsh0bwjgt0lmljxv6nv[0m
+[36m  Disk Storage (3.5ms) [0m[34mDownloaded file from key: 2ffo85eqwqqear2cmgz1h7rexrxs[0m
+[36m  Disk Storage (2.5ms) [0m[34mDownloaded file from key: u9iw949uqlp0pb79bsoy4ouvr1ga[0m
+[36m  Disk Storage (44.0ms) [0m[34mDownloaded file from key: isbagkwhu7i444yoggzy7vxw023b[0m
+[36m  Disk Storage (24.1ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+[36m  Disk Storage (2.5ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+[36m  Disk Storage (2.7ms) [0m[34mDownloaded file from key: oqekz5uf5ixosvah2qyx9mz60tnx[0m
+[36m  Disk Storage (2.6ms) [0m[34mDownloaded file from key: i6obsz5o5qsh0bwjgt0lmljxv6nv[0m
+[36m  Disk Storage (2.6ms) [0m[34mDownloaded file from key: 2ffo85eqwqqear2cmgz1h7rexrxs[0m
+[36m  Disk Storage (2.6ms) [0m[34mDownloaded file from key: u9iw949uqlp0pb79bsoy4ouvr1ga[0m
+[36m  Disk Storage (36.1ms) [0m[32mUploaded file to key: 45l65fhkc3sa32rbj6lrx1mg3lwq (checksum: ugFCnwsm5DCR/olN9m5mAQ==)[0m
+[36m  Disk Storage (21.6ms) [0m[34mDownloaded file from key: isbagkwhu7i444yoggzy7vxw023b[0m
+[36m  Disk Storage (2.7ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+[36m  Disk Storage (2.6ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+[36m  Disk Storage (2.4ms) [0m[34mDownloaded file from key: oqekz5uf5ixosvah2qyx9mz60tnx[0m
+[36m  Disk Storage (2.0ms) [0m[34mDownloaded file from key: i6obsz5o5qsh0bwjgt0lmljxv6nv[0m
+[36m  Disk Storage (2.7ms) [0m[34mDownloaded file from key: 2ffo85eqwqqear2cmgz1h7rexrxs[0m
+[36m  Disk Storage (3.2ms) [0m[34mDownloaded file from key: u9iw949uqlp0pb79bsoy4ouvr1ga[0m
+[36m  Disk Storage (2.6ms) [0m[34mDownloaded file from key: 45l65fhkc3sa32rbj6lrx1mg3lwq[0m
+[36m  Disk Storage (26.1ms) [0m[34mDownloaded file from key: isbagkwhu7i444yoggzy7vxw023b[0m
+[36m  Disk Storage (2.4ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+[36m  Disk Storage (2.6ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+[36m  Disk Storage (2.6ms) [0m[34mDownloaded file from key: oqekz5uf5ixosvah2qyx9mz60tnx[0m
+[36m  Disk Storage (2.6ms) [0m[34mDownloaded file from key: i6obsz5o5qsh0bwjgt0lmljxv6nv[0m
+[36m  Disk Storage (2.5ms) [0m[34mDownloaded file from key: 2ffo85eqwqqear2cmgz1h7rexrxs[0m
+[36m  Disk Storage (3.7ms) [0m[34mDownloaded file from key: u9iw949uqlp0pb79bsoy4ouvr1ga[0m
+[36m  Disk Storage (2.6ms) [0m[34mDownloaded file from key: 45l65fhkc3sa32rbj6lrx1mg3lwq[0m
+------- loading details/PRJ
+initializing PRJ
+[36m  Disk Storage (57.1ms) [0m[34mDownloaded file from key: isbagkwhu7i444yoggzy7vxw023b[0m
+Listing documents hash for project
+[36m  Disk Storage (25.5ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+Listing documents hash for project
+key: /show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectBrief:1.4
+[36m  Disk Storage (2.4ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+Listing documents hash for project
+key: /show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectBrief:1.4
+key: /show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Beschlussvorlage:0.0
+[36m  Disk Storage (2.5ms) [0m[34mDownloaded file from key: oqekz5uf5ixosvah2qyx9mz60tnx[0m
+Listing documents hash for project
+key: /show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectBrief:1.4
+key: /show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Beschlussvorlage:0.0
+key: /show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Informationsvorlage:0.1
+[36m  Disk Storage (2.9ms) [0m[34mDownloaded file from key: i6obsz5o5qsh0bwjgt0lmljxv6nv[0m
+Listing documents hash for project
+key: /show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectBrief:1.4
+key: /show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Beschlussvorlage:0.0
+key: /show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Informationsvorlage:0.1
+key: /show/oqekz5uf5ixosvah2qyx9mz60tnx/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: DailyLog:0.3
+[36m  Disk Storage (2.5ms) [0m[34mDownloaded file from key: 2ffo85eqwqqear2cmgz1h7rexrxs[0m
+Listing documents hash for project
+key: /show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectBrief:1.4
+key: /show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Beschlussvorlage:0.0
+key: /show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Informationsvorlage:0.1
+key: /show/oqekz5uf5ixosvah2qyx9mz60tnx/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: DailyLog:0.3
+key: /show/i6obsz5o5qsh0bwjgt0lmljxv6nv/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: InitiationStagePlan:1.6
+[36m  Disk Storage (2.6ms) [0m[34mDownloaded file from key: u9iw949uqlp0pb79bsoy4ouvr1ga[0m
+Listing documents hash for project
+key: /show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectBrief:1.4
+key: /show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Beschlussvorlage:0.0
+key: /show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Informationsvorlage:0.1
+key: /show/oqekz5uf5ixosvah2qyx9mz60tnx/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: DailyLog:0.3
+key: /show/i6obsz5o5qsh0bwjgt0lmljxv6nv/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: InitiationStagePlan:1.6
+key: /show/2ffo85eqwqqear2cmgz1h7rexrxs/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: LessonsLog:0.5
+[36m  Disk Storage (2.4ms) [0m[34mDownloaded file from key: 45l65fhkc3sa32rbj6lrx1mg3lwq[0m
+Listing documents hash for project
+key: /show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectBrief:1.4
+key: /show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Beschlussvorlage:0.0
+key: /show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Informationsvorlage:0.1
+key: /show/oqekz5uf5ixosvah2qyx9mz60tnx/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: DailyLog:0.3
+key: /show/i6obsz5o5qsh0bwjgt0lmljxv6nv/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: InitiationStagePlan:1.6
+key: /show/2ffo85eqwqqear2cmgz1h7rexrxs/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: LessonsLog:0.5
+key: /show/u9iw949uqlp0pb79bsoy4ouvr1ga/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectProductDescription:1.2
+processing {"/show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"ProjectBrief:1.4", "/show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"Beschlussvorlage:0.0", "/show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"Informationsvorlage:0.1", "/show/oqekz5uf5ixosvah2qyx9mz60tnx/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"DailyLog:0.3", "/show/i6obsz5o5qsh0bwjgt0lmljxv6nv/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"InitiationStagePlan:1.6", "/show/2ffo85eqwqqear2cmgz1h7rexrxs/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"LessonsLog:0.5", "/show/u9iw949uqlp0pb79bsoy4ouvr1ga/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"ProjectProductDescription:1.2", "/show/45l65fhkc3sa32rbj6lrx1mg3lwq/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"Beschlussvorlage:2.1"}
+Default DataFrame >> found version in 1 : 4
+%%%% Project DataFrame  @ 1 : 4 not nil
+/show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[1][4]
+Default DataFrame >> found version in 0 : 0
+%%%% Project DataFrame  @ 0 : 0 not nil
+/show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[0][0]
+Default DataFrame >> found version in 0 : 1
+%%%% Project DataFrame  @ 0 : 1 not nil
+/show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[0][1]
+Default DataFrame >> found version in 0 : 3
+%%%% Project DataFrame  @ 0 : 3 not nil
+/show/oqekz5uf5ixosvah2qyx9mz60tnx/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[0][3]
+Default DataFrame >> found version in 1 : 6
+%%%% Project DataFrame  @ 1 : 6 not nil
+/show/i6obsz5o5qsh0bwjgt0lmljxv6nv/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[1][6]
+Default DataFrame >> found version in 0 : 5
+%%%% Project DataFrame  @ 0 : 5 not nil
+/show/2ffo85eqwqqear2cmgz1h7rexrxs/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[0][5]
+Default DataFrame >> found version in 1 : 2
+%%%% Project DataFrame  @ 1 : 2 not nil
+/show/u9iw949uqlp0pb79bsoy4ouvr1ga/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[1][2]
+Default DataFrame >> found version in 2 : 1
+%%%% Project DataFrame  @ 2 : 1 not nil
+/show/45l65fhkc3sa32rbj6lrx1mg3lwq/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[2][1]
+documents are {"/show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"ProjectBrief:1.4", "/show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"Beschlussvorlage:0.0", "/show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"Informationsvorlage:0.1", "/show/oqekz5uf5ixosvah2qyx9mz60tnx/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"DailyLog:0.3", "/show/i6obsz5o5qsh0bwjgt0lmljxv6nv/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"InitiationStagePlan:1.6", "/show/2ffo85eqwqqear2cmgz1h7rexrxs/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"LessonsLog:0.5", "/show/u9iw949uqlp0pb79bsoy4ouvr1ga/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"ProjectProductDescription:1.2", "/show/45l65fhkc3sa32rbj6lrx1mg3lwq/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"Beschlussvorlage:2.1"}
+------- loading details/PRJ
+initializing PRJ
+[36m  Disk Storage (26.9ms) [0m[34mDownloaded file from key: isbagkwhu7i444yoggzy7vxw023b[0m
+Listing documents hash for project
+[36m  Disk Storage (2.3ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+Listing documents hash for project
+key: /show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectBrief:1.4
+[36m  Disk Storage (2.4ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+Listing documents hash for project
+key: /show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectBrief:1.4
+key: /show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Beschlussvorlage:0.0
+[36m  Disk Storage (2.7ms) [0m[34mDownloaded file from key: oqekz5uf5ixosvah2qyx9mz60tnx[0m
+Listing documents hash for project
+key: /show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectBrief:1.4
+key: /show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Beschlussvorlage:0.0
+key: /show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Informationsvorlage:0.1
+[36m  Disk Storage (2.7ms) [0m[34mDownloaded file from key: i6obsz5o5qsh0bwjgt0lmljxv6nv[0m
+Listing documents hash for project
+key: /show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectBrief:1.4
+key: /show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Beschlussvorlage:0.0
+key: /show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Informationsvorlage:0.1
+key: /show/oqekz5uf5ixosvah2qyx9mz60tnx/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: DailyLog:0.3
+[36m  Disk Storage (2.8ms) [0m[34mDownloaded file from key: 2ffo85eqwqqear2cmgz1h7rexrxs[0m
+Listing documents hash for project
+key: /show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectBrief:1.4
+key: /show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Beschlussvorlage:0.0
+key: /show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Informationsvorlage:0.1
+key: /show/oqekz5uf5ixosvah2qyx9mz60tnx/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: DailyLog:0.3
+key: /show/i6obsz5o5qsh0bwjgt0lmljxv6nv/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: InitiationStagePlan:1.6
+[36m  Disk Storage (3.0ms) [0m[34mDownloaded file from key: u9iw949uqlp0pb79bsoy4ouvr1ga[0m
+Listing documents hash for project
+key: /show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectBrief:1.4
+key: /show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Beschlussvorlage:0.0
+key: /show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Informationsvorlage:0.1
+key: /show/oqekz5uf5ixosvah2qyx9mz60tnx/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: DailyLog:0.3
+key: /show/i6obsz5o5qsh0bwjgt0lmljxv6nv/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: InitiationStagePlan:1.6
+key: /show/2ffo85eqwqqear2cmgz1h7rexrxs/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: LessonsLog:0.5
+[36m  Disk Storage (2.3ms) [0m[34mDownloaded file from key: 45l65fhkc3sa32rbj6lrx1mg3lwq[0m
+Listing documents hash for project
+key: /show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectBrief:1.4
+key: /show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Beschlussvorlage:0.0
+key: /show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: Informationsvorlage:0.1
+key: /show/oqekz5uf5ixosvah2qyx9mz60tnx/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: DailyLog:0.3
+key: /show/i6obsz5o5qsh0bwjgt0lmljxv6nv/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: InitiationStagePlan:1.6
+key: /show/2ffo85eqwqqear2cmgz1h7rexrxs/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: LessonsLog:0.5
+key: /show/u9iw949uqlp0pb79bsoy4ouvr1ga/application/vnd.openxmlformats-officedocument.wordprocessingml.document => value: ProjectProductDescription:1.2
+processing {"/show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"ProjectBrief:1.4", "/show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"Beschlussvorlage:0.0", "/show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"Informationsvorlage:0.1", "/show/oqekz5uf5ixosvah2qyx9mz60tnx/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"DailyLog:0.3", "/show/i6obsz5o5qsh0bwjgt0lmljxv6nv/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"InitiationStagePlan:1.6", "/show/2ffo85eqwqqear2cmgz1h7rexrxs/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"LessonsLog:0.5", "/show/u9iw949uqlp0pb79bsoy4ouvr1ga/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"ProjectProductDescription:1.2", "/show/45l65fhkc3sa32rbj6lrx1mg3lwq/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"Beschlussvorlage:2.1"}
+Default DataFrame >> found version in 1 : 4
+%%%% Project DataFrame  @ 1 : 4 not nil
+/show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[1][4]
+Default DataFrame >> found version in 0 : 0
+%%%% Project DataFrame  @ 0 : 0 not nil
+/show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[0][0]
+Default DataFrame >> found version in 0 : 1
+%%%% Project DataFrame  @ 0 : 1 not nil
+/show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[0][1]
+Default DataFrame >> found version in 0 : 3
+%%%% Project DataFrame  @ 0 : 3 not nil
+/show/oqekz5uf5ixosvah2qyx9mz60tnx/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[0][3]
+Default DataFrame >> found version in 1 : 6
+%%%% Project DataFrame  @ 1 : 6 not nil
+/show/i6obsz5o5qsh0bwjgt0lmljxv6nv/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[1][6]
+Default DataFrame >> found version in 0 : 5
+%%%% Project DataFrame  @ 0 : 5 not nil
+/show/2ffo85eqwqqear2cmgz1h7rexrxs/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[0][5]
+Default DataFrame >> found version in 1 : 2
+%%%% Project DataFrame  @ 1 : 2 not nil
+/show/u9iw949uqlp0pb79bsoy4ouvr1ga/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[1][2]
+Default DataFrame >> found version in 2 : 1
+%%%% Project DataFrame  @ 2 : 1 not nil
+/show/45l65fhkc3sa32rbj6lrx1mg3lwq/application/vnd.openxmlformats-officedocument.wordprocessingml.document put to DF[2][1]
+documents are {"/show/isbagkwhu7i444yoggzy7vxw023b/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"ProjectBrief:1.4", "/show/jmoicmsozio0e8as7q8216r0tnsd/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"Beschlussvorlage:0.0", "/show/hvnrfnx1u0n5gm1rhi3ynzxead59/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"Informationsvorlage:0.1", "/show/oqekz5uf5ixosvah2qyx9mz60tnx/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"DailyLog:0.3", "/show/i6obsz5o5qsh0bwjgt0lmljxv6nv/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"InitiationStagePlan:1.6", "/show/2ffo85eqwqqear2cmgz1h7rexrxs/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"LessonsLog:0.5", "/show/u9iw949uqlp0pb79bsoy4ouvr1ga/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"ProjectProductDescription:1.2", "/show/45l65fhkc3sa32rbj6lrx1mg3lwq/application/vnd.openxmlformats-officedocument.wordprocessingml.document"=>"Beschlussvorlage:2.1"}
+showing doc with {"key"=>"jmoicmsozio0e8as7q8216r0tnsd", "content_type"=>"vnd.openxmlformats-officedocument.wordprocessingml.document", "extension"=>".docx"}
+[36m  Disk Storage (64.3ms) [0m[34mDownloaded file from key: isbagkwhu7i444yoggzy7vxw023b[0m
+[36m  Disk Storage (33.8ms) [0m[34mDownloaded file from key: jmoicmsozio0e8as7q8216r0tnsd[0m
+[36m  Disk Storage (2.9ms) [0m[34mDownloaded file from key: hvnrfnx1u0n5gm1rhi3ynzxead59[0m
+[36m  Disk Storage (3.3ms) [0m[34mDownloaded file from key: oqekz5uf5ixosvah2qyx9mz60tnx[0m
+[36m  Disk Storage (2.6ms) [0m[34mDownloaded file from key: i6obsz5o5qsh0bwjgt0lmljxv6nv[0m
+[36m  Disk Storage (2.8ms) [0m[34mDownloaded file from key: 2ffo85eqwqqear2cmgz1h7rexrxs[0m
+[36m  Disk Storage (2.6ms) [0m[34mDownloaded file from key: u9iw949uqlp0pb79bsoy4ouvr1ga[0m
+[36m  Disk Storage (2.0ms) [0m[34mDownloaded file from key: 45l65fhkc3sa32rbj6lrx1mg3lwq[0m

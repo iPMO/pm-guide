@@ -29,7 +29,7 @@ class Document < ApplicationRecord
     if content_type == "application/pdf" then extension = '.pdf'
     else extension = '.docx'
     end
-    puts "downloading document with key : #{key}"
+    Rails.logger.info "downloading document with key : #{key}"
     document_pdf.open(tmpdir: 'storage/') do |file| FileUtils.cp(file,'public/'.concat(key).concat(extension)) 
     end
 

@@ -7,6 +7,7 @@ class IpMO < Sinatra::Base
 
   set :views, settings.root + '/app/views/'
   set :static, :true
+  logger = Rails.logger
  
   # get the index page
   get '/' do
@@ -54,7 +55,7 @@ class IpMO < Sinatra::Base
     else extension = ".docx"
    end
    params['extension'] = extension
-   puts "showing doc with #{params}"
+   logger.info "showing doc with #{params}"
    file_name = 'public/'.concat(key).concat()
    link_file(params)
    @params = params
@@ -65,7 +66,7 @@ class IpMO < Sinatra::Base
   get '/details/:project_name' do
     @params = params
     project = params['project_name']
-    puts "------- loading details/#{project}"
+    logger.info "------- loading details/#{project}"
     erb :details, :layout => :application
   end
 
@@ -105,7 +106,7 @@ class IpMO < Sinatra::Base
   # method to list the parameter
   def check(params)
     @params.each do |param|
-     puts param
+      logger.info "check(#{params}"
     end
   end
 
@@ -136,7 +137,7 @@ class IpMO < Sinatra::Base
 
   def check_document_pdf
     Document.find_each do |doc|
-      puts doc.document_pdf.attached? 
+      logger.info "#{doc} is attached #{doc.document_pdf.attached?}"
      end
   end
 
@@ -151,7 +152,7 @@ class IpMO < Sinatra::Base
   end
 
   def split_filename(filename)
-    puts "~~~~~~ going to split file=> #{filename.to_s}"
+    logger.info "~~~~~~ going to split file=> #{filename.to_s}"
     chunks = filename.split
     chunks 
   end
@@ -171,7 +172,7 @@ class IpMO < Sinatra::Base
     extension = params['extension']
     name = params['key'].concat(extension)
     file_name_path = "#{Rails.root}/public/#{name}"
-    puts "link_file with params #{params}"
+    logger.info "link_file with params #{params}"
     send_file(
       file_name_path,
          filename: "#{name}",

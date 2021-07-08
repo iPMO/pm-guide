@@ -5,7 +5,7 @@ class Project
   attr_accessor :tuples, :multi_index, :vector_pre, :vector_init, :vector_sub1, :vector_sub2, :vector_final, :default_dataframe, :documents
 
   def initialize(project)
-    puts "###### initialize reached for #{project}"
+   Rails.logger.info "initializing #{project}"
    @default_dataframe = nil 
    @project_dataframe = nil
 
@@ -48,7 +48,6 @@ class Project
 
    create_default_dataframe
 
-   puts "++++ details to be loaded for #{project}"
 
     if project != nil 
      @documents = Hash.new
@@ -68,8 +67,8 @@ class Project
   end
 
   def print_documents_hash
-    puts "********* Listing documents hash for project"
-    @documents.each {|key, value| puts "key: #{key} => value: #{value}"} 
+    Rails.logger.info "Listing documents hash for project"
+    @documents.each {|key, value| Rails.logger.info "key: #{key} => value: #{value}"} 
   end
 
   # Thias method is replacing the default_dataframe values
@@ -77,31 +76,27 @@ class Project
   def get_project_dataframe
     if @documents != nil
      @project_dataframe = @default_dataframe.clone_structure
-     puts "processing #{@documents}"
+     Rails.logger.info "processing #{@documents}"
      @documents.each {|key, value|  
      arrY = value.split(/:/)
       if arrY != nil then
        version = arrY[1]
        arr = version.split(/\./) 
-       puts "version is #{version}"
+       Rails.logger.info "version is #{version}"
         for j in 0..8
          for i in 0..8
-           puts @project_dataframe[j][i]
            if @default_dataframe[j][i] == version then
-             puts "&&&& Default DataFrame >> found version in #{j} : #{i}"
+             Rails.logger.info "Default DataFrame >> found version in #{j} : #{i}"
             if @project_dataframe[j][i] == nil then
-             puts "%%%% Project DataFrame  @ #{j} : #{i} not nil" 
+              Rails.logger.info "Project DataFrame  @ #{j} : #{i} not nil" 
              @project_dataframe[j][i] = key 
-             puts "++++++ #{key} put to DF[#{j}][#{i}]"
+             Rails.logger.info "#{key} put to DF[#{j}][#{i}]"
             else 
-              puts "skipping #{j} : #{i}"
              next 
             end
-            puts @project_dataframe.to_s
            else
              if @project_dataframe[j][i] != nil then
              else
-              puts "----- nil put to DF[#{j}][#{i}]"
               @project_dataframe[j][i] = nil
              end
            end
@@ -126,7 +121,7 @@ class Project
   end
 
   def get_documents
-    puts "documents are #{@documents}"
+    Rails.logger.info "documents are #{@documents}"
    @documents
   end
 

@@ -1,2 +1,3 @@
 <h1> To be done </h1>
 <embed src="<%= Rails.root+/public/.concat(@params[:key]).concat(params['extension'])%>" type="application/<%= params['content_type'] %>" width="100%" height="600px" />
+  <% Rails.logger.info "SHOWing #{@params}" %>
