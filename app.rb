@@ -23,11 +23,12 @@ class IpMO < Sinatra::Base
     check(params)
     get_pdf_file(params)
     doc = new_document(params)
-    if doc.nil? 
+    if doc.nil? then
       code = "<% Error uploading document %>"
       erb code
+    else
+     erb :done, :layout => :application
     end
-    erb :done, :layout => :application
   end
 
   # route to list all projects
@@ -45,32 +46,30 @@ class IpMO < Sinatra::Base
     erb :list, :layout => :application
   end
 
-  get '/show/:key/application/:content_type' do
+  get '/show/:key/application/:content_type/:filename' do
    key = params['key']
+   filename = params['filename']
    content_type = params['content_type']
    if content_type == 'pdf' 
     then extension = '.pdf'
-    else extension = ".docx"
+    else 
+      extension = ".docx"
+    #  copykey2filename(key,extension,filename) 
    end
    params['extension'] = extension
    logger.info "showing doc with #{params}"
-   file_name = 'public/'.concat(key).concat()
+   file_name = 'public/'.concat(key)
    link_file(params)
    @params = params
-    erb  :show, :layout => :application 
+   erb  :show, :layout => :application 
   end
 
   # route for details of a certain project
   get '/details/:project_name' do
-   logger.info "#{ActiveRecord::Base.connected?}"
-   if ActiveRecord::Base.connected? then
     @params = params
     project = params['project_name']
     logger.info "------- loading details/#{project}"
     erb :details, :layout => :application
-   else
-     erb :error
-   end
   end
 
   get '/home/sinatra/code/pm-guide/public/pdf_logo.jpeg' do
@@ -111,6 +110,12 @@ class IpMO < Sinatra::Base
     @params.each do |param|
       logger.info "check(#{params}"
     end
+  end
+
+  def dbconnected?
+    dbstat = ActiveRecord::Base.connected?
+    logger.info "db is #{dbstat} connected"
+    @dbstat
   end
 
   # method to save a new document
@@ -173,14 +178,26 @@ class IpMO < Sinatra::Base
  
   def link_file(params) 
     extension = params['extension']
-    name = params['key'].concat(extension)
-    file_name_path = "#{Rails.root}/public/#{name}"
+    tmpfile_name = params['key'].concat(extension)
+    filename = params['filename']
+    file_name_path = "#{Rails.root}/public/#{tmpfile_name}"
     logger.info "link_file with params #{params}"
+    sendfile2show(file_name_path, filename, extension)
+  end
+
+  def copykey2filename(tmpfile_name,tmpfile_extension,filename)
+    logger.info "copying #{tmpfile_name}.#{tmpfile_extension} 2 #{filename}"
+    file_name_path = "#{Rails.root}".concat('/public/').concat(filename)
+    file2copy = "#{Rails.root}/public/#{tmpfile_name}#{tmpfile_extension}"
+    sendfile2show(file_name_path, "#{tmpfile_name}.#{tmpflie_extension}", tmpfile_extension)
+  end
+
+  def sendfile2show(file_name_path, name, extension)
     send_file(
       file_name_path,
-         filename: "#{name}",
-         disposition: 'inline',
-         type: "#{extension}"
+      filename: "#{name}",
+      disposition: 'inline',
+      type: "#{extension}"
      )
     FileUtils.chmod 0755, file_name_path.to_s
   end

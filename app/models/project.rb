@@ -54,7 +54,7 @@ class Project
      Document.where(project_name: project.upcase).each do |d| 
       d.document_pdf_download 
       content_type = d.document_pdf.blob.content_type
-      key = '/show/'.concat(d.document_pdf.key).concat('/').concat(content_type)
+      key = '/show/'.concat(d.document_pdf.key).concat('/').concat(content_type).concat('/').concat(d.read_attribute(:document_name))
       doc_type = d.read_attribute(:document_type)
       ver_number = d.read_attribute(:process_step).to_s
       value = String.new(doc_type).concat(':').concat(ver_number)
