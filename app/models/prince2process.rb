@@ -1,10 +1,11 @@
 require 'daru'
 
  class Prince2process
-   attr_accessor :tuples, :docs2be_updated, :docs2be_created, :proc_dataframe, :proc_stepnumber
+   attr_accessor :tuples, :docs2be_updated, :docs2be_created, :proc_dataframe, :proc_stepnumber, :default_dataframe
 
   # Generic and Default Process initialization
   def initialize
+    Rails.logger.info "initiate Prince2process class"
 
     # initiate and create rows for dataframe
     @tuples = [
@@ -50,7 +51,7 @@ require 'daru'
     @proc_dataframe = Daru::DataFrame. new
     @proc_stepnumber = 0
 
-    create_dataframe
+    @default_dataframe = create_dataframe
   end
 
   def create_dataframe
@@ -70,6 +71,10 @@ require 'daru'
      index: @multi_index
    )
    @default_dataframe
+  end
+
+  def get_default_dataframe
+    @default_dataframe
   end
 
  end
