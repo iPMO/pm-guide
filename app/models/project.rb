@@ -1,4 +1,5 @@
 require 'daru'
+require 'prince2process.rb'
 
 class Project
 
@@ -6,48 +7,8 @@ class Project
 
   def initialize(project)
    Rails.logger.info "initializing #{project}"
-   @default_dataframe = nil 
+   @default_dataframe = Prince2process.new.create_dataframe 
    @project_dataframe = nil
-
-   # Variables for creating data frame structure
-   @tuples = [
-    [:corporate,0],
-    [:direct,1],
-    [:manage,2],
-    [:manage,3],
-    [:manage,4],
-    [:manage,5],
-    [:manage,6],
-    [:manage,7],
-    [:deliver,8]
-   ]
-
-   @multi_index = Daru::MultiIndex.from_tuples(@tuples)
-
-   @vector_pre0 = ['0.0','0.1','0.2','0.3','0.4','0.5','0.6','0.7',nil]
-   @vector_pre1 = ['1.0','1.1','1.2','1.3','1.4','1.5','1.6','1.7',nil]
-   @vector_init2= ['2.0','2.1',nil,'2.3','2.4','2.5',nil,nil,nil]
-   @vector_init3= ['3.0','3.1',nil,'3.3','3.4','3.5',nil,nil,nil]
-   @vector_sub4 = ['4.0','4.1','4.2','4.3','4.4','4.5','4.6','4.7','4.8']
-   @vector_sub5 = ['5.0','5.1','5.2','5.3','5.4','5.5','5.6','5.7','5.8']
-   @vector_sub6 = ['6.0','6.1',nil,nil,nil,'6.5','6.6','6.7','6.8']
-   @vector_fina1= ['7.0','7.1',nil,'7.3','7.4','7.5','7.6','7.7',nil]
-   @vector_fina2= ['8.0','8.1','8.2','8.3','8.4','8.5','8.6','8.7',nil]
-
-   @order_mi = Daru::MultiIndex.from_tuples([
-    [:pre,0],
-    [:pre,1],
-    [:initiation,2],
-    [:initiation,3],
-    [:subsequent,4],
-    [:subsequent,5],
-    [:subsequent,6],
-    [:final,7],
-    [:final,8]
-    ])
-
-   create_default_dataframe
-
 
     if project != nil 
      @documents = Hash.new
