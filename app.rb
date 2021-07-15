@@ -82,6 +82,11 @@ class IpMO < Sinatra::Base
   end
 
   get '/details/:project_name/:process' do
+    logger.info "############################# do it get here?"
+    process = params['process']
+    project = params['project_name']
+    logger.info "loading process #{process} for #{project}"
+    @project = Project.new(project)
     erb :processes, :layout => :application
   end
 
