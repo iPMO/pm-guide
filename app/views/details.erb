@@ -21,27 +21,18 @@
 </style>
 <!-- ruby helper //-->
 <% @logo = String.new('pdf_').concat('logo.jpeg') %>
-<% if params['project_name'] != nil %>
-  <% if params['project_name'] == 'PRJ' %>
-    <% then %>
-    <h1>Download PRINCE2:2017 Templates </h1>
-  <% else %>
-    <h1><%= "PRINCE2 Process Details #{params['project_name']} " %></h1>
-  <% end %>
+<% if params['project_name'] == 'PRJ' %>
+ <% then %>
+  <h1>Download PRINCE2:2017 Templates </h1>
+ <% else %>
+  <h1><%= "PRINCE2 Process Details #{params['project_name']} " %></h1>
+ <% end %>
   <!-- Initialize the NON persistent Project Object and load with documents hash and data_frame //-->
-  <% puts "******* params: #{params['project_name']}" %>
-  <% @project = Project.new(params['project_name']) %>
-  <!-- load with project data_frame //-->
-  <% @data_frame = @project.get_project_dataframe %>
-  <% @documents = @project.get_documents %>
-  <% @logo = String.new('word_').concat('logo.jpeg') if params['project_name'] == 'PRJ' %>
-<% else %>
-  <h1><%= "Welcome to the interactive Project Management guide !" %></h1>
-  <% @project = Project.new(nil)  %>
-  <% @data_frame = @project.default_dataframe %>
-  <% @documents = @project.create_default_dataframe_documents %>
-  <% @logo = String.new('doc_').concat('logo.jpeg') %>
-<% end %>
+ <% # @project = Project.new(params['project_name']) %> 
+ <!-- load with project data_frame //-->
+ <% @data_frame = @project.get_project_dataframe %>
+ <% @documents = @project.get_documents %>
+ <% @logo = String.new('word_').concat('logo.jpeg') if params['project_name'] == 'PRJ' %>
 
 <!-- Table //-->
 <table class="tg">
@@ -744,9 +735,9 @@
   <tr>
   </tr>
   <tr>
-    <td class="tg-kusv" style="border-style:solid;border-width:2px"><b>&nbsp;Starting Up a Project&nbsp;</b></td>
-    <td class="tg-jl7l" style="border-style:solid;border-width:2px"><b>&nbsp;Directing a Project&nbsp;</b></td>
-    <td class="tg-0cjc" style="border-style:solid;border-width:2px"><b>&nbsp;Initiating a Project&nbsp;</b></td>
+    <td class="tg-kusv" style="border-style:solid;border-width:2px"><a href=<%="/details/#{params['project_name']}/0"%> target="_blank"><b>&nbsp;Starting Up a Project&nbsp;</b></a></td>
+    <td class="tg-jl7l" style="border-style:solid;border-width:2px"><a href=<%="/details/#{params['project_name']}/1"%> target="_blank"><b>&nbsp;Directing a Project&nbsp;</b></a></td>
+    <td class="tg-0cjc" style="border-style:solid;border-width:2px"><a href=<%="/details/#{params['project_name']}/2"%> target=="_blank"><b>&nbsp;Initiating a Project&nbsp;</b></a></td>
     <td class="tg-0cjd" style="border-style:solid;border-width:2px"><b>&nbsp;Controlling a Stage&nbsp;</b></td>
     <td class="tg-es88" style="border-style:solid;border-width:2px"><b>&nbsp;Managing Product Delivery&nbsp;</b></td>
     <td class="tg-ik58" style="border-style:solid;border-width:2px"><b>&nbsp;Managing a Stage Boundary&nbsp;</td>

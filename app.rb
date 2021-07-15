@@ -69,7 +69,20 @@ class IpMO < Sinatra::Base
     @params = params
     project = params['project_name']
     logger.info "------- loading details/#{project}"
+
+    if project != nil 
+      then 
+      @project = Project.new(project)
+    else
+      code = "<% <h1>Error!!! Unknown project as parameter</h1> %>"
+      erb code
+    end
+    logger.info "#{@project} created"
     erb :details, :layout => :application
+  end
+
+  get '/details/:project_name/:process' do
+    erb :processes, :layout => :application
   end
 
   get '/home/sinatra/code/pm-guide/public/pdf_logo.jpeg' do

@@ -46,9 +46,8 @@ require 'daru'
      [:final,8]
     ])
 
-    @docs2be_updated = Hash. new
-    @docs2be_created = Array. new
     @proc_dataframe = Daru::DataFrame. new
+    @refproc_dataframe = Daru::DataFrame.new
     @proc_stepnumber = 0
 
     @default_dataframe = create_dataframe
@@ -75,6 +74,80 @@ require 'daru'
 
   def get_default_dataframe
     @default_dataframe
+  end
+
+  # checks if the process is ready for next stage
+  def is_eligable?
+    proc_dataframe = get_proc_dataframe
+    proj_dataframe = get_refproc_dataframe
+    nextstage = false
+    Rails.logger.info "proc_dataframe[#{proc_dataframe.nil?}]"
+    if proc_dataframe != nil 
+    then
+      Rails.logger.info "proj_dataframe[#{proj_dataframe.nil?}]"
+      if proj_dataframe != nil
+       then
+        Rails.logger.info "starting comparation"  
+        array= []
+        ccol = 0
+        proj_dataframe.each{|col|
+          puts "column: #{ccol}"
+          crow = 0
+          col.each{|value|
+            if value.nil?
+              then 
+              crow = crow+1
+              next
+            else
+             pvalue = proc_dataframe[ccol][crow]
+             arra = value.split("/")
+             arr = arra[5].split(" ")
+             ar = arr[3].split('.')
+             ver = "#{ar[0]}.#{ar[1]}"
+             match = "#{arr[2]} #{ver}"
+             Rails.logger.info "#{match}"
+             Rails.logger.info "proj_dataframe[#{crow}]-->#{match} : proc_dataframe[#{crow}]-->#{pvalue}"
+             if pvalue == nil  
+               then 
+                nextstage = false 
+             else 
+               nextstage = pvalue.include? "#{match}"
+               if match then proc_dataframe[ccol][crow] = match else next end
+             end
+             crow = crow+1
+            end
+          }
+          ccol = ccol+1
+        }
+      else
+        nextstage = false
+      end 
+    else
+      nextstage = false
+    end
+    Rails.logger.info  "value are #{nextstage} equal"
+    #set_proc_dataframe(proc_dataframe)
+    nextstage
+  end
+
+  def get_proc_dataframe
+    Rails.logger.info "#{@proc_dataframe} available"
+    @proc_dataframe
+   end
+
+   def set_proc_dataframe(df)
+     Rails.logger.info "???????????????? got this #{df} to set as proc_dataframe"
+     @proc_dataframe = df
+   end
+
+  def get_refproc_dataframe
+    Rails.logger.info "#{@refproc_dataframe} available"
+    @refproc_dataframe
+  end
+
+  def set_refproc_dataframe(df)
+    Rails.logger.info "????????????????? got this #{df} to set as refproc_dataframe"
+    @refproc_dataframe = df
   end
 
  end
