@@ -112,7 +112,13 @@ require 'daru'
                 nextstage = false 
              else 
                nextstage = pvalue.include? "#{match}"
-               if match then proc_dataframe[ccol][crow] = match else next end
+               if match 
+                 then 
+                   proc_dataframe[ccol][crow] = match 
+                   Rails.logger.info "changed proc_datframe[#{ccol}][#{crow}] = #{match}"
+               else
+                 next 
+               end
              end
              crow = crow+1
             end
