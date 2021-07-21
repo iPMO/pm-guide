@@ -1,23 +1,14 @@
 require 'daru'
 
-class Dpprocess < Prince2process
+class Ipprocess < Prince2process
 
   def initialize
    super
-   Rails.logger.info "Dpprocess initialization in progress"
+   Rails.logger.info "Ipprocess initialization in progress"
   end
 
   def get_dataframe(df)
-   df = df.at 2..8
-   for i in 0..7 do 
-     Rails.logger.info "---->get_dataframe:delete.row(#{i})" 
-    if i !=0 
-     then 
-      df.delete_row(1) 
-    else 
-      df.delete_row(i) 
-    end 
-   end
+   df = df[:initiation].row[3..5] 
    df
   end
 
@@ -26,7 +17,7 @@ class Dpprocess < Prince2process
    df = get_dataframe(df)
    super(df)
   end
-
+  
   def set_proc_dataframe(df)
    df = get_dataframe(df)
    super(df)
