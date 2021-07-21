@@ -23,7 +23,7 @@ class Project
       @documents = create_default_dataframe_documents
     end
     if @processes.size == 0
-      then set_processes([Spprocess.new(),nil,nil,nil,nil,nil,nil]) 
+      then set_processes([Spprocess.new(),Dpprocess.new(),nil,nil,nil,nil,nil]) 
     else
       Rails.logger.info "#{@processes} already set"
     end
