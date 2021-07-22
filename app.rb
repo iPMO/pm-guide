@@ -33,6 +33,23 @@ class IpMO < Sinatra::Base
     erb :prince2pmguide_main, :layout => :application
   end
 
+  get '/themes' do
+    erb :themes, :layout => :application
+  end
+
+  get '/themes/:theme' do
+    case params['theme']
+    when "businesscase"
+      erb :businesscase_theme, :layout => :application
+    when "organisation"
+      erb :organisation_theme, :layout => :application
+    when "change"
+      erb "not yet implmentend"
+    else 
+      erb "unknown theme"
+    end
+  end
+
   # show the upload document view 
   get '/upload' do
     erb :upload, :layout => :application
@@ -139,6 +156,10 @@ class IpMO < Sinatra::Base
 
   get %r{.*/stylesheets/application.css} do
         redirect('app/assets/stylesheets/application.css')
+  end
+
+  get '/public/BC_BRP.png' do
+    File.read(File.join('public', 'BC_BRP.png'))
   end
 
   # ROUTES are OVER, here comes the HELPES

@@ -9,7 +9,7 @@ require 'prince2process.rb'
   end 
 
   def get_dataframe(df)
-    df = df[:pre].row[1..7]
+    df = df[:subsequent].row[5..7]
     df
   end
 
