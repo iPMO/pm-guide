@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'sinatra/base'
+require 'pg'
 
 
 class IpMO < Sinatra::Base
@@ -7,11 +8,29 @@ class IpMO < Sinatra::Base
 
   set :views, settings.root + '/app/views/'
   set :static, :true
+  set :raise_errors, :true
   logger = Rails.logger
- 
+
+  before '*' do
+   path = request.path 
+   begin
+    conn = PG::Connection.new(:dbname => "ipmo_#{Rails.env}")
+    logger.info "DB CONNECTED ????? #{conn}"
+    logger.info "#################### redirection to #{path}"
+   rescue 
+     halt 401,"<h1><font size='48px' color='red'>POSTGRES NOT RUNNING</h1>"
+   end
+  end
+
+  get '/error' do
+    erb :dbconnerror, :layout => :application 
+    halt
+  end
+
   # get the index page
   get '/' do
-    redirect 'details/PRJ'
+    #redirect 'details/PRJ'
+    erb :prince2pmguide_main, :layout => :application
   end
 
   # show the upload document view 
@@ -109,7 +128,7 @@ class IpMO < Sinatra::Base
   get '/app/assets/stylesheets/application.css'  do
     File.read(File.join('app','assets','stylesheets','application.css'))
   end
-
+  
   get '/home/sinatra/code/pm-guide/public/application.css' do
     File.read(File.join('public','application.css'))
   end
@@ -128,12 +147,6 @@ class IpMO < Sinatra::Base
     @params.each do |param|
       logger.info "check(#{params}"
     end
-  end
-
-  def dbconnected?
-    dbstat = ActiveRecord::Base.connected?
-    logger.info "db is #{dbstat} connected"
-    @dbstat
   end
 
   # method to save a new document

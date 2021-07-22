@@ -7,6 +7,8 @@ require 'daru'
   def initialize
     Rails.logger.info "initiate Prince2process class"
 
+    @processname = nil
+
     # initiate and create rows for dataframe
     @tuples = [
      [:corporate,0],
@@ -154,6 +156,15 @@ require 'daru'
   def set_refproc_dataframe(df)
     Rails.logger.info "????????????????? got this #{df} to set as refproc_dataframe"
     @refproc_dataframe = df
+  end
+
+  def set_proc_name(name)
+    @processname = name
+  end
+
+  def get_proc_name
+    Rails.logger.info "********************** returning proc_name : #{@processname}"
+    @processname
   end
 
  end

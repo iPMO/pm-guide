@@ -2,7 +2,7 @@ require 'daru'
 require 'prince2process.rb'
 
 class Project
-
+  
   attr_accessor :tuples, :multi_index, :vector_pre, :vector_init, :vector_sub1, :vector_sub2, :vector_final, :default_dataframe, :documents, :processes
 
   def initialize(project)
@@ -11,6 +11,7 @@ class Project
    @project_dataframe = nil
    @refproc_dataframe = nil
    @processes = []
+   @procnamesarray = nil
    @documents = nil
    @ref_documents = nil
 
@@ -19,11 +20,12 @@ class Project
       @project_dataframe = get_dataframe(@documents)
       @ref_documents = get_documents_hash('PRJ')
       @refproc_dataframe = get_dataframe(@ref_documents)
+      set_procnames_array(["01 Starting up a Project (SU)","02 Directing a Project (DP)","03 Initiating a Project (IP)","04 Controlling a Stage (CS)","05 Managing Product Delivery (MP)","06 Managing a Stage Boundary (SB)","07 Closing a Project (CP)"])
     else
       @documents = create_default_dataframe_documents
     end
     if @processes.size == 0
-      then set_processes([Spprocess.new(),Dpprocess.new(),Ipprocess.new(),nil,nil,nil,nil]) 
+      then set_processes([Suprocess.new(),Dpprocess.new(),Ipprocess.new(),Csprocess.new(),nil,nil,nil]) 
     else
       Rails.logger.info "#{@processes} already set"
     end
@@ -123,14 +125,18 @@ class Project
   end
 
   def set_processes(processes)
+    procnamesarray = get_procnames_array
     for i in 0..processes.size do
       Rails.logger.info "processes[#{i}] = #{processes[i]}"
       process = processes[i]
+      processname = procnamesarray[i]
+      Rails.logger.info "processname => #{processname}"
       if process == nil then
         next
       else
         process.set_proc_dataframe(get_project_dataframe)
         process.set_refproc_dataframe(get_refproc_dataframe)
+        process.set_proc_name(processname)
       end
     end
     @processes = processes
@@ -142,6 +148,16 @@ class Project
 
   def get_processes_status
     Rails.logger.info "We have currently #{get_processes.size} for this project"  
+  end
+
+  def get_procnames_array
+    Rails.logger.info "returning procnamesarray[#{@procnamesarray}]"
+    @procnamesarray
+  end
+
+  def set_procnames_array(arr)
+    Rails.logger.info "setting process name from arr[#{arr}]"
+    @procnamesarray = arr
   end
 
 end

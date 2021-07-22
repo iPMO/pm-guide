@@ -1,19 +1,5 @@
 <!DOCTYPE html>
-<% # Rails.root.join('app/assets/stylesheets','application.css') %>
 <html>
-<style type="text/css">
-<% case ENV['RAILS_ENV'] %>
- <% when "development" %>
-   body { background: white; }
-   * { color: black; }
- <% when 'production' %>
-   body { background: red; }
-   * { color: white; }
- <% else %>
-   body { background: gren; }
-      * { color: black; }
-<% end %>
-</style>
   <head>
     <title>iPMO</title>
     <link href="<%= Rails.root.join('public','application.css') %>" rel="/stylesheet" type="text/css" />
@@ -25,7 +11,8 @@
     <section class="content">
       <nav class="side_nav">
        <ul>
-        <li><a href="/">Home</a></li>
+        <li><a href="/">PM Guide</a></li>
+        <li><a href="/details/PRJ">process overview</a></li>
         <li><a href="/upload">document upload</a></li>
         <li><a href="/list">project list</a></li>
        </ul>

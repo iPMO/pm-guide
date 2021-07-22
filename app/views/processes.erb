@@ -1,19 +1,21 @@
 <% cswitch = params['process'].to_i %>
 <% case cswitch %>
 <% when 0 %>
-  <% processtxt = "Start Up a Project" %>
   <% process = @project.get_processes[0] %>
+  <% processtxt = process.get_proc_name %>
   <% style = "width:50%; height:100%;background-color:#fffe65;border-color:black;text-align:left;vertical-align:top; border-style:solid"%>
 <% when 1 %>
-  <% processtxt = "Directing a Project" %>
   <% process = @project.get_processes[1] %>
+  <% processtxt = process.get_proc_name %>
   <% style = "width:50%; height:100%;background-color:#6665cd;border-color:black;text-align:left;vertical-align:top; border-style:solid"%>
 <% when 2 %>
-  <% processtxt = "Initiating a Project" %>
   <% process = @project.get_processes[2] %>
+  <% processtxt = process.get_proc_name %>
   <% style = "width:50%; height:100%;background-color:#67fd9a;border-color:black;text-align:left;vertical-align:top; border-style:solid"%>
 <% when 3 %>
-  <% processtxt = "Controling a Stage" %>
+  <% process = @project.get_processes[3] %>
+  <% processtxt = process.get_proc_name %>
+  <% style = "width:50%; height:100%;background-color:#67df9d;border-color:black;text-align:left;vertical-align:top; border-style:solid"%>
 <% when 4 %>
   <% processtxt = "Managing Product Delivery" %>
 <% when 5 %>
@@ -24,9 +26,24 @@
   <% processtxt = "not known" %>
 <% end %>
 
-<% elsigable = false %>
-<% if process != nil then eligable = process.is_eligable? end %>
-<h1><%= "#{params['project_name']} => #{processtxt} : NextStage[#{eligable}]" %></h1>
+<% eligable = false %>
+<% iecolor = "red" %>
+  <% if process != nil %>
+   <% then %>
+   <% eligable = process.is_eligable? %>
+  <% end %>
+  <p>
+  <font size="7" color="blue"><%= "#{params['project_name']} "%></font>
+  <% iecolor = "green" if eligable %>
+  <br />
+  </p>
+  <p>
+  <font size="6" color="blue"><%= "#{processtxt} " %></font>
+  <br />
+  <font size="5" color="<%= "#{iecolor}"%>"><%= "next stage eligable? => [#{eligable}] " %></font>
+  </p>
+  <br/>
+  <hr />
 <table style='<%= "#{style}" %>'>
   <tr>
     <th><u>hierachie</u></th>
