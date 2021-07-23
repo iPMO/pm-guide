@@ -7,7 +7,7 @@
 <% when 1 %>
   <% process = @project.get_processes[1] %>
   <% processtxt = process.get_proc_name %>
-  <% style = "width:50%; height:100%;background-color:#6665cd;border-color:black;text-align:left;vertical-align:top; border-style:solid"%>
+  <% style = "width:50%; height:100%;background-color:#87cefa;border-color:black;text-align:left;vertical-align:top; border-style:solid"%>
 <% when 2 %>
   <% process = @project.get_processes[2] %>
   <% processtxt = process.get_proc_name %>
@@ -17,11 +17,17 @@
   <% processtxt = process.get_proc_name %>
   <% style = "width:50%; height:100%;background-color:#67df9d;border-color:black;text-align:left;vertical-align:top; border-style:solid"%>
 <% when 4 %>
-  <% processtxt = "Managing Product Delivery" %>
+  <% process = @project.get_processes[4] %>
+  <% processtxt = process.get_proc_name %>
+  <% style = "width:50%; height:100%;background-color:#cfcfcf;border-color:black;text-align:left;vertical-align:top; border-style:solid"%>
 <% when 5 %>
-  <% processtxt = "Managing Stage Boundaries" %>
+  <% process = @project.get_processes[5] %>
+  <% processtxt = process.get_proc_name %>
+  <% style = "width:50%; height:100%;background-color:#ffcb2f;border-color:black;text-align:left;vertical-align:top; border-style:solid"%>
 <% when 6 %>
-  <% processtxt = "Closing a Project" %>
+  <% process = @project.get_processes[6] %>
+  <% processtxt = process.get_proc_name %>
+  <% style = "width:50%; height:100%;background-color:#38fff8;border-color:black;text-align:left;vertical-align:top; border-style:solid"%>
 <% else %>
   <% processtxt = "not known" %>
 <% end %>
@@ -55,5 +61,5 @@
      <%= "<th><u>#{cname}</u></th>" %>
     <% } %>
   </tr>
-  <%= process.get_proc_dataframe.to_html_tbody() %>
+   <%= process.get_proc_dataframe.to_html_tbody() %>
 </table>

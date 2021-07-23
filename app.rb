@@ -29,8 +29,8 @@ class IpMO < Sinatra::Base
 
   # get the index page
   get '/' do
-    #redirect 'details/PRJ'
-    erb :prince2pmguide_main, :layout => :application
+    redirect 'details/PRJ'
+    #erb :prince2pmguide_main, :layout => :application
   end
 
   get '/themes' do
@@ -76,7 +76,6 @@ class IpMO < Sinatra::Base
   
   # route for listing the project with name :project
   get '/list/:project_name' do
-    puts "listing details for project #{params['project_name']}"
     check(params)
     @params = params
     erb :list, :layout => :application
@@ -102,7 +101,8 @@ class IpMO < Sinatra::Base
 
   # route for details of a certain project
   get '/details/:project_name' do
-    @params = params
+    params['fixcontent'] = "prince2pmguide_main"
+    check(params)
     project = params['project_name']
     logger.info "------- loading details/#{project}"
 
@@ -114,6 +114,7 @@ class IpMO < Sinatra::Base
       erb code
     end
     logger.info "#{@project} created"
+    @params = params
     erb :details, :layout => :application
   end
 
@@ -173,8 +174,8 @@ class IpMO < Sinatra::Base
   # ROUTES are OVER, here comes the HELPES
   # method to list the parameter
   def check(params)
-    @params.each do |param|
-      logger.info "check(#{params}"
+    params.each do |p|
+      logger.info "++++++++++++++++ found param[#{p}]"
     end
   end
 

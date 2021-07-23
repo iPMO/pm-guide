@@ -7,17 +7,36 @@
   <body>
     <header class="main">
       <h1><%= @page_title %></h1>
-    </header>
-    <section class="content">
-      <nav class="side_nav">
-        <a href="/">Home</a>&nbsp;|&nbsp;<a href="/list">Projects</a>&nbsp;|&nbsp;<a href="/details/PRJ">Processes & Templates</a>
-        <a href="/upload"><img alt="document upload" src="public/upload.png" width="125" height="50" style="padding-left: 250px;"></a>
+      <nav class="top_nav">
+       <a href="/">PRINCE2 Overview</a>&nbsp;|&nbsp;
+       <a href="/list">List Projects</a>&nbsp;|&nbsp;
+       <!-- <a href="/details/PRJ">Processes & Templates</a>&nbsp;|&nbsp; //-->
+       <a href="/upload">Upload a Document</a>
       </nav>
+    </header>
+    <hr />
+    <article>
+     <section class="dynamic_content">
       <main class="main_text">
-        <hr />
         <%= yield %>
-        <hr />
       </main>
-    </section>
+     </section>
+     <section class="fixed_content">
+       <% @fixcontent = @params['fixcontent'] %>
+       <% Rails.logger.info "######## fixcontent ====== #{@fixcontent}" %>
+      <% if @fixcontent != nil %>
+        <% then %>
+       <%= render(:erb,:"#{@fixcontent}") %>
+     <% else %>
+     <% end %>
+     </section>
+    </article>
+    <br />
+    <hr />
+    <br />
+    <footer>
+      iPMO&copy; was written by Thomas Krueger <a href="mailto:thomas.krueger@cms.hu-berlin.de">thomas.krueger@cms.hu-berlin.de</a> under <a href="https://en.wikipedia.org/wiki/GNU_General_Public_License">GNU General Public License</a>
+    </footer>
+    <br />
   </body>
 </html>
