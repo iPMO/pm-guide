@@ -44,7 +44,9 @@ class IpMO < Sinatra::Base
     when "organisation"
       erb :organisation_theme, :layout => :application
     when "change"
-      erb "not yet implmentend"
+      erb :change_theme, :layout => :application
+    when "risk"
+      erb :risk_theme, :layout => :application
     else 
       erb "unknown theme"
     end
