@@ -1,6 +1,58 @@
-<ul>
+<!--<ul>
   <li><a href="/themes/businesscase">Business Case (BC)</a></li>
   <li><a href="/themes/change">Change (CH)</a></li>
   <li><a href="/themes/organisation">Organisation (OR)</a></li>
   <li><a href="/themes/organisation">Risk (RK)</a></li>
-</ul>
+</ul>//-->
+<style>
+/* (A) 3 COLUMNS ON BIG SCREENS */
+.flexWrap {
+  display: flex;
+  width: 100%;
+}
+.flexCol {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 10%;
+  background: #ffe2e0;
+}
+.flexColAct {
+  box-sizing: border-box;
+  padding: 10px;
+  width: 10%;
+  background: #f3ffe0;
+}
+/* (B) BREAK DOWN 1 COLUMN ON SMALL SCREENS */
+@media only screen and (max-width: 768px) {
+  .flexWrap { flex-wrap: wrap; }
+  .flexCol { width: 100%; }
+}
+</style>
+
+<% @theme = params['theme'] %>
+<% @tHash = Hash[
+    bc: 'Business Case (BC)',
+    ch:  'Change (CH)',
+    or: 'Organisation (OR)',
+    pl: 'Plans (PL)',
+    pg: 'Progress (PG)',
+    rk: 'Risk (RK)',
+    qu: 'Quality (QU)'
+ ]  %>
+
+<div class="flexWrap">
+ <% @tHash.each{|k,v| %>
+  <% if @theme == "#{k}" then %>
+    <div class="flexColAct">
+      <a href='/themes/<%= "#{k}" %>'><%= "#{v}" %>'
+      <font size=3 style="text-decoration: underline" >
+  <% else %>
+      <div class="flexCol">
+       <a href='/themes/<%= "#{k}" %>'><%= "#{v}" %>'
+       <font size=2 style="text-decoration: none">
+  <% end %>
+      </font>
+      </a>
+   </div>
+<% } %>
+</div>

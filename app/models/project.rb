@@ -176,4 +176,8 @@ class Project
     @procnamesarray = arr
   end
 
+  def get_proc_abbr(i)
+    @processes[i].get_proc_name.split('(')[1].chop
+  end
+
 end

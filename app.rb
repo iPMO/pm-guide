@@ -38,18 +38,9 @@ class IpMO < Sinatra::Base
   end
 
   get '/themes/:theme' do
-    case params['theme']
-    when "businesscase"
-      erb :businesscase_theme, :layout => :application
-    when "organisation"
-      erb :organisation_theme, :layout => :application
-    when "change"
-      erb :change_theme, :layout => :application
-    when "risk"
-      erb :risk_theme, :layout => :application
-    else 
-      erb "unknown theme"
-    end
+    @theme = params['theme']
+    params['fixcontent'] = "#{@theme}_theme"
+    erb :themes, :layout => :application
   end
 
   # show the upload document view 
@@ -126,7 +117,8 @@ class IpMO < Sinatra::Base
     project = params['project_name']
     logger.info "loading process #{process} for #{project}"
     @project = Project.new(project)
-    erb :processes, :layout => :application
+    params['fixcontent'] = "#{@project.get_proc_abbr(process.to_i).downcase}_process"
+    erb :details, :layout => :application
   end
 
   get '/home/sinatra/code/pm-guide/public/pdf_logo.jpeg' do
