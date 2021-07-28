@@ -49,22 +49,37 @@ class Project
 
   def get_documents_hash(project)
     documents = Hash.new
+    keysH = Hash.new(Hash.new)
     Document.where(project_name: project.upcase).each do |d|
     d.document_pdf_download
     content_type = d.document_pdf.blob.content_type
-    key = '/show/'.concat(d.document_pdf.key).concat('/').concat(content_type).concat('/').concat(d.read_attribute(:document_name))
+    url = "/show/"
+    url.concat(d.document_pdf.key).concat('/').concat(content_type).concat('/').concat(d.read_attribute(:document_name))
     doc_type = d.read_attribute(:document_type)
     ver_number = d.read_attribute(:process_step).to_s
+    arrV = ver_number.split(/\./)
+    if arrV.size > 2 
+      then
+       baseV = "#{arrV[0]}.#{arrV[1]}"
+       if keysH.has_key?(baseV) 
+        then
+         keysH[baseV][:subdocs].store(ver_number,url)
+       else
+         keysH.store(baseV,{:key => url, :subdocs => {}})
+       end
+    else
+      keysH.store(ver_number,{:key => url, :subdocs => {}})
+    end
     value = String.new(doc_type).concat(':').concat(ver_number)
-    print_documents_hash(documents)
-    documents.store(key,value)
+    documents.store(keysH,value)
    end
+   print_documents_hash(documents)
    documents
   end
 
   def print_documents_hash(documents)
-    Rails.logger.info "Listing documents hash for project"
-    documents.each {|key, value| Rails.logger.info "key: #{key} => value: #{value}"} 
+    Rails.logger.info "documents hash.size = #{documents.size}"
+    documents.each{|k,v| Rails.logger.info "[#{v}]]"}
   end
 
   # Thias method is replacing the default_dataframe values
@@ -77,15 +92,23 @@ class Project
      arrY = value.split(/:/)
       if arrY != nil then
        version = arrY[1]
-       arr = version.split(/\./) 
-       #Rails.logger.info "version is #{version}"
+       arr = version.split(/\./)
+       baseVersion = "#{arr[0]}.#{arr[1]}"
+       Rails.logger.info "arr[version] = #{arr} : baseVersion = #{baseVersion}"
         for j in 0..8
          for i in 0..8
-           if @default_dataframe[j][i] == version then
-             #Rails.logger.info "Default DataFrame >> found version in #{j} : #{i}"
+           if @default_dataframe[j][i] == baseVersion then
+            Rails.logger.info "Default DataFrame >> found version in #{j} : #{i}"
             if project_dataframe[j][i] == nil then
              # Rails.logger.info "Project DataFrame  @ #{j} : #{i} not nil" 
-             project_dataframe[j][i] = key 
+             if key[:subdocs] != nil 
+               then 
+                aKey = key["#{j}.#{i}"][:key]
+                key["#{j}.#{i}"][:subdocs].each{|k,v| aKey.concat("&").concat(v)}
+                project_dataframe[j][i] = aKey
+             else
+               project_dataframe[j][i] = key["#{j}.#{i}"][:key]
+             end
              #Rails.logger.info "#{key} put to DF[#{j}][#{i}]"
             else 
              next 

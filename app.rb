@@ -165,6 +165,22 @@ class IpMO < Sinatra::Base
     File.read(File.join('public', 'PDMC.png'))
   end
 
+  get '/public/LEVELS_OF_PLAN.png' do
+    File.read(File.join('public', 'LEVELS_OF_PLAN.png'))
+  end
+
+  get '/public/PLAN_ANALYSE_THE_RISKS.png' do
+    File.read(File.join('public', 'PLAN_ANALYSE_THE_RISKS.png'))
+  end
+
+  get '/public/PBS.png' do
+    File.read(File.join('public', 'PBS.png'))
+  end
+  
+  get '/public/PLANS_PURPOSE.png' do
+    File.read(File.join('public', 'PLANS_PURPOSE.png'))
+  end
+
   # ROUTES are OVER, here comes the HELPES
   # method to list the parameter
   def check(params)
