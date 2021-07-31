@@ -48,33 +48,51 @@ class Project
   end
 
   def get_documents_hash(project)
-    documents = Hash.new
-    keysH = Hash.new(Hash.new)
-    Document.where(project_name: project.upcase).each do |d|
+    keysH = Hash.new { |h, k| h[k] = h.dup.clear }
+    Document.where(project_name: project.upcase).order(process_step: 'ASC').each do |d|
     d.document_pdf_download
-    content_type = d.document_pdf.blob.content_type
-    url = "/show/"
-    url.concat(d.document_pdf.key).concat('/').concat(content_type).concat('/').concat(d.read_attribute(:document_name))
-    doc_type = d.read_attribute(:document_type)
-    ver_number = d.read_attribute(:process_step).to_s
-    arrV = ver_number.split(/\./)
-    if arrV.size > 2 
-      then
-       baseV = "#{arrV[0]}.#{arrV[1]}"
-       if keysH.has_key?(baseV) 
-        then
-         keysH[baseV][:subdocs].store(ver_number,url)
+    #showmain?key=12d3f&filename.0=test&doctype.0=docx&key.1=aksdfj3&filename.1=test2&doctype.1=pdf&key.2=lasdfjsadf78898&filename.2=test3&doctype.2=xls&(test=test)?
+    baseUrl = "/show/docs?"
+    url = String.new
+    subUrl = String.new
+    docKey = d.document_pdf.key
+    conType = d.document_pdf.blob.content_type
+    fileName = d.read_attribute(:document_name)
+    docType = d.read_attribute(:document_type)
+    verNumber = d.read_attribute(:process_step).to_s
+    arrV = verNumber.split(/\./)
+    baseV = "#{arrV[0]}.#{arrV[1]}"
+    switch = keysH.has_key?("#{baseV}")
+    noBaseVswitch = (arrV.size > 2)
+    docCount = keysH["#{baseV}"][:docs].size
+    url.concat("key.#{docCount}=")
+    url.concat(docKey)
+    url.concat("&content_type.#{docCount}=")
+    url.concat(conType)
+    url.concat("&file_name.#{docCount}=")
+    url.concat(fileName)
+
+    case switch
+     when true 
+       Rails.logger.info "got ya #{baseV} : #{verNumber} with #{keysH[baseV.to_s]}"
+       keysH["#{baseV}"][:docs].store(docCount.to_s,url)
+     when false
+       Rails.logger.info "uuuups, no key for #{baseV} : #{verNumber}"
+       if noBaseVswitch 
+         then
+          keysH["#{baseV}"][:docs].store(docCount.to_s,url) 
        else
-         keysH.store(baseV,{:key => url, :subdocs => {}})
+         baseUrl.concat(url)
+         keysH["#{baseV}"][:docs].store(docCount.to_s,baseUrl)
        end
-    else
-      keysH.store(ver_number,{:key => url, :subdocs => {}})
-    end
-    value = String.new(doc_type).concat(':').concat(ver_number)
-    documents.store(keysH,value)
+     else
+       Rails.logger.info " XXXXXXXXXX UNKNOWN CASE XXXXXXXXXXXXXX"
+     end
+
    end
-   print_documents_hash(documents)
-   documents
+    Rails.logger.info " haaaaaaaaaaaaaaaaaaaaaaash => [#{keysH}]"
+    #print_documents_hash(documents)
+    keysH
   end
 
   def print_documents_hash(documents)
@@ -89,41 +107,36 @@ class Project
      project_dataframe = @default_dataframe.clone_structure
      #Rails.logger.info "processing #{@documents}"
      documents.each {|key, value|  
-     arrY = value.split(/:/)
-      if arrY != nil then
-       version = arrY[1]
-       arr = version.split(/\./)
-       baseVersion = "#{arr[0]}.#{arr[1]}"
-       Rails.logger.info "arr[version] = #{arr} : baseVersion = #{baseVersion}"
+       baseVersion = key 
+       #Rails.logger.info "arr[version] = #{arr} : baseVersion = #{baseVersion}"
         for j in 0..8
          for i in 0..8
            if @default_dataframe[j][i] == baseVersion then
-            Rails.logger.info "Default DataFrame >> found version in #{j} : #{i}"
+            #Rails.logger.info "Default DataFrame >> found version in #{j} : #{i}"
             if project_dataframe[j][i] == nil then
              # Rails.logger.info "Project DataFrame  @ #{j} : #{i} not nil" 
-             if key[:subdocs] != nil 
-               then 
-                aKey = key["#{j}.#{i}"][:key]
-                key["#{j}.#{i}"][:subdocs].each{|k,v| aKey.concat("&").concat(v)}
-                project_dataframe[j][i] = aKey
-             else
-               project_dataframe[j][i] = key["#{j}.#{i}"][:key]
-             end
-             #Rails.logger.info "#{key} put to DF[#{j}][#{i}]"
-            else 
-             next 
-            end
-           else
+              size = value[:docs].size
+              cSwitch = (size > 1)
+              value[:docs].each{|k,v|
+               key = project_dataframe[j][i]
+               if !key.nil? then
+                key.concat("&").concat(v)
+              else 
+               key = v
+               project_dataframe[j][i] = v
+              end
+              project_dataframe[j][i] = key
+              Rails.logger.info "keyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy #{key}"
+              }
+            else
              if project_dataframe[j][i] != nil then
              else
               project_dataframe[j][i] = nil
              end
            end
+          end
          end
         end
-      else
-       next
-      end
     }
     else
       project_dataframe = @default_dataframe
@@ -140,7 +153,7 @@ class Project
   end
 
   def get_documents
-    Rails.logger.info "documents are #{@documents}"
+    #Rails.logger.info "documents are #{@documents}"
    @documents
   end
 

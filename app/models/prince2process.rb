@@ -80,16 +80,21 @@ require 'daru'
 
   # checks if the process is ready for next stage
   def is_eligable?
+    true
+  end
+
+  # to be fixed
+  def bck_is_eligable?
     proc_dataframe = get_proc_dataframe
     proj_dataframe = get_refproc_dataframe
     nextstage = false
-    Rails.logger.info "proc_dataframe[#{proc_dataframe.nil?}]"
+    #Rails.logger.info "proc_dataframe[#{proc_dataframe.nil?}]"
     if proc_dataframe != nil 
     then
-      Rails.logger.info "proj_dataframe[#{proj_dataframe.nil?}]"
+      #Rails.logger.info "proj_dataframe[#{proj_dataframe.nil?}]"
       if proj_dataframe != nil
        then
-        Rails.logger.info "starting comparation"  
+        #Rails.logger.info "starting comparation"  
         array= []
         ccol = 0
         proj_dataframe.each{|col|
@@ -102,6 +107,7 @@ require 'daru'
               next
             else
              pvalue = proc_dataframe[ccol][crow]
+             #Rails.logger.info "***************************************** is_eligable? pvalue[#{pvalue}]"
              arra = value.split("/")
              arr = arra[5].split(" ")
              ar = arr[3].split('.')
@@ -139,22 +145,22 @@ require 'daru'
   end
 
   def get_proc_dataframe
-    Rails.logger.info "#{@proc_dataframe} available"
+    #Rails.logger.info "#{@proc_dataframe} available"
     @proc_dataframe
    end
 
    def set_proc_dataframe(df)
-     Rails.logger.info "???????????????? got this #{df} to set as proc_dataframe"
+     #Rails.logger.info "???????????????? got this #{df} to set as proc_dataframe"
      @proc_dataframe = df
    end
 
   def get_refproc_dataframe
-    Rails.logger.info "#{@refproc_dataframe} available"
+    #Rails.logger.info "#{@refproc_dataframe} available"
     @refproc_dataframe
   end
 
   def set_refproc_dataframe(df)
-    Rails.logger.info "????????????????? got this #{df} to set as refproc_dataframe"
+    #Rails.logger.info "????????????????? got this #{df} to set as refproc_dataframe"
     @refproc_dataframe = df
   end
 
@@ -163,7 +169,7 @@ require 'daru'
   end
 
   def get_proc_name
-    Rails.logger.info "********************** returning proc_name : #{@processname}"
+    #Rails.logger.info "********************** returning proc_name : #{@processname}"
     @processname
   end
 

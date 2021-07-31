@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra/base'
 require 'pg'
+require 'mustermann'
 
 
 class IpMO < Sinatra::Base
@@ -75,6 +76,8 @@ class IpMO < Sinatra::Base
   end
 
   get '/show/:key/application/:content_type/:filename' do
+  #get '/show/:slug(.:ext)?' do
+   #logger.info "show slug(#{params[:slug]}"
    key = params['key']
    filename = params['filename']
    content_type = params['content_type']
@@ -90,6 +93,43 @@ class IpMO < Sinatra::Base
    link_file(params)
    @params = params
    erb  :show, :layout => :application 
+  end
+
+  get '/show/:slug(.:ext)?' do
+    logger.info "** slugged with #{params} is a Hash #{params.is_a? Hash}"
+    params.each{|k,v| logger.info "#{k} => #{v}"}
+
+    opsHash = {"key" => {},"file_name" => {},"content_type" => {}}
+    
+    params.each{|k,v| 
+      logger.info "#{k} => #{v}"
+      arr = k.split('.')
+      hKey = arr[0]
+      hCount = arr[1]
+      logger.info "ppppppppppppppppppp going to process opsHash[#{hKey}] => #{hCount}"
+      if opsHash.has_key? hKey 
+        then
+          opsHash["#{hKey}"].store("#{hCount}",v)
+      else
+        next
+      end
+    }
+    logger.info "oooooooooooooo opsHash[ #{opsHash} ]"
+
+    opsHash.each{|k,v| 
+      logger.info "+++++++++ opsHash[#{k}] {"
+      logger.info "------------- #{v} { "
+      v.each{|k,v| 
+        logger.info " ----------------- #{k} : #{v}"
+      }
+      logger.info " .............. }"
+
+      logger.info "+++++++++ } "
+    }
+    
+    @params = link_file(opsHash)
+    Rails.logger.info "************************************************************************* Showing document with params[#{@params}]"
+    erb :show, :layout => :application 
   end
 
   # route for details of a certain project
@@ -247,13 +287,22 @@ class IpMO < Sinatra::Base
     !m.nil?
   end
  
-  def link_file(params) 
-    extension = params['extension']
-    tmpfile_name = params['key'].concat(extension)
-    filename = params['filename']
-    file_name_path = "#{Rails.root}/public/#{tmpfile_name}"
-    logger.info "link_file with params #{params}"
-    sendfile2show(file_name_path, filename, extension)
+  def link_file(opsHash) 
+    logger.info "+++++++ link_file for opsHash.size(#{opsHash.size})"
+
+    for i in 0..opsHash["key"].size-1 do 
+      key = opsHash["key"][i.to_s] 
+      type = opsHash["content_type"][i.to_s] 
+      filename = opsHash["file_name"][i.to_s]
+      extension = filename.split('.')[1]
+      tmpfile_name = key.concat(extension)
+      file_name_path = "#{Rails.root}/public/#{tmpfile_name}"
+      sendfile2show(file_name_path, filename, extension)
+      params[:key] = key
+      params['extension'] = extension
+      params['type'] = type
+    end
+    params
   end
 
   def copykey2filename(tmpfile_name,tmpfile_extension,filename)
