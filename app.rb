@@ -95,6 +95,10 @@ class IpMO < Sinatra::Base
    erb  :show, :layout => :application 
   end
 
+  get '/show?key.*=:key'
+
+  end
+
   get '/show/:slug(.:ext)?' do
     logger.info "** slugged with #{params} is a Hash #{params.is_a? Hash}"
     params.each{|k,v| logger.info "#{k} => #{v}"}
@@ -288,9 +292,15 @@ class IpMO < Sinatra::Base
   end
  
   def link_file(opsHash) 
-    logger.info "+++++++ link_file for opsHash.size(#{opsHash.size})"
+    hSize = opsHash.size
+    logger.info "+++++++ link_file for opsHash.size(#{hSize})"
+    skey, sextension, stype, sfilename = nil
 
-    for i in 0..opsHash["key"].size-1 do 
+    case hSize
+    when 1
+      logger.info "----------- only one file "
+    else
+     for i in 0..opsHash["key"].size-1 do 
       key = opsHash["key"][i.to_s] 
       type = opsHash["content_type"][i.to_s] 
       filename = opsHash["file_name"][i.to_s]
@@ -298,11 +308,21 @@ class IpMO < Sinatra::Base
       tmpfile_name = key.concat(extension)
       file_name_path = "#{Rails.root}/public/#{tmpfile_name}"
       sendfile2show(file_name_path, filename, extension)
-      params[:key] = key
-      params['extension'] = extension
-      params['type'] = type
+      if i == 0 then
+        skey = key
+        sextension = extension
+        stype = type
+        sfilename = filename
+      else 
+        next
+      end
+     end
     end
+    params[:key] = skey
+    params['extension'] = sextension
+    params['type'] = stype
     params
+    redirect "/show/#{skey}/application/#{stype}/#{sfilename}"
   end
 
   def copykey2filename(tmpfile_name,tmpfile_extension,filename)
