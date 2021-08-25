@@ -90,13 +90,9 @@ class IpMO < Sinatra::Base
    params['extension'] = extension
    logger.info "showing doc with #{params}"
    file_name = 'public/'.concat(key)
-   link_file(params)
+   #link_file(key, content_type, filename)
    @params = params
    erb  :show, :layout => :application 
-  end
-
-  get '/show?key.*=:key'
-
   end
 
   get '/show/:slug(.:ext)?' do
@@ -130,10 +126,40 @@ class IpMO < Sinatra::Base
 
       logger.info "+++++++++ } "
     }
+
+    extension = ".docx"
+    key = params['key.0']
+    content = params['content_type.0']
+    file = params['file_name.0']
+    extension = file.split('.')[2] 
+
+    begin
+      logger.info "link #{file} with #{key} from #{content}"
+      tmpfile_name = key.concat('.').concat(extension)
+      file_name_path = "#{Rails.root}/public/#{tmpfile_name}"
+      logger.info "file linked to temp file in #{file_name_path}"
+    rescue => e
+      logger.error "link file caused #{e.class} error #{e.message}"
+    end
     
-    @params = link_file(opsHash)
-    Rails.logger.info "************************************************************************* Showing document with params[#{@params}]"
-    erb :show, :layout => :application 
+    logger.info "going to send #{file_name_path}"
+    stream do |out|
+      logger.info "send file #{file_name_path} with #{file} from type #{content} 2 show"
+      send_file(
+       file_name_path,
+       filename: "#{file}",
+       disposition: 'attachment',
+       type: "#{content}"
+      )
+    rescue => e
+      logger.error "An error of type #{e.class} happened, message is #{e.message}"
+    end
+
+  end
+
+  get '/test' do
+    logger.info "it works"
+
   end
 
   # route for details of a certain project
@@ -291,38 +317,13 @@ class IpMO < Sinatra::Base
     !m.nil?
   end
  
-  def link_file(opsHash) 
-    hSize = opsHash.size
-    logger.info "+++++++ link_file for opsHash.size(#{hSize})"
-    skey, sextension, stype, sfilename = nil
-
-    case hSize
-    when 1
-      logger.info "----------- only one file "
-    else
-     for i in 0..opsHash["key"].size-1 do 
-      key = opsHash["key"][i.to_s] 
-      type = opsHash["content_type"][i.to_s] 
-      filename = opsHash["file_name"][i.to_s]
+  def link_file(key, type, filename) 
+      logger.info "link #{filename} with #{key} from #{type}"
       extension = filename.split('.')[1]
       tmpfile_name = key.concat(extension)
       file_name_path = "#{Rails.root}/public/#{tmpfile_name}"
-      sendfile2show(file_name_path, filename, extension)
-      if i == 0 then
-        skey = key
-        sextension = extension
-        stype = type
-        sfilename = filename
-      else 
-        next
-      end
-     end
-    end
-    params[:key] = skey
-    params['extension'] = sextension
-    params['type'] = stype
-    params
-    redirect "/show/#{skey}/application/#{stype}/#{sfilename}"
+      logger.info "file linked to temp file in #{file_name_path}"
+      #sendfile2show(file_name_path, filename, extension)
   end
 
   def copykey2filename(tmpfile_name,tmpfile_extension,filename)
@@ -333,13 +334,18 @@ class IpMO < Sinatra::Base
   end
 
   def sendfile2show(file_name_path, name, extension)
-    send_file(
+    logger.info "send file #{file_name_path} with #{name} from type #{extension} 2 show"
+    begin 
+     send_file(
       file_name_path,
       filename: "#{name}",
-      disposition: 'inline',
+      disposition: 'attachment',
       type: "#{extension}"
      )
     FileUtils.chmod 0755, file_name_path.to_s
+    rescue => e
+      logger.error "Error #{e.class} with message #{e.message} in sendfile2show occured"
+    end
   end
 
 end
