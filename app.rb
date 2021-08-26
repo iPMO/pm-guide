@@ -143,7 +143,7 @@ class IpMO < Sinatra::Base
     end
     
     logger.info "going to send #{file_name_path}"
-    stream do |out|
+    begin 
       logger.info "send file #{file_name_path} with #{file} from type #{content} 2 show"
       send_file(
        file_name_path,
@@ -154,11 +154,6 @@ class IpMO < Sinatra::Base
     rescue => e
       logger.error "An error of type #{e.class} happened, message is #{e.message}"
     end
-
-  end
-
-  get '/test' do
-    logger.info "it works"
 
   end
 
@@ -187,7 +182,7 @@ class IpMO < Sinatra::Base
     project = params['project_name']
     logger.info "loading process #{process} for #{project}"
     @project = Project.new(project)
-    params['fixcontent'] = "#{@project.get_proc_abbr(process.to_i).downcase}_process"
+    params['fixcontent'] = "#{@project.get_proc_abbr(process.to_i).downcase}_process_fix"
     erb :details, :layout => :application
   end
 
