@@ -116,6 +116,7 @@ GEM
     msgpack (1.4.2)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
+    ngzip (1.2.0)
     nio4r (2.5.7)
     nokogiri (1.11.7-x86_64-linux)
       racc (~> 1.4)
@@ -263,6 +264,7 @@ DEPENDENCIES
   jquery-rails
   listen (~> 3.3)
   mustermann
+  ngzip
   paperclip
   pg (~> 1.1)
   puma (~> 5.0)
@@ -271,6 +273,7 @@ DEPENDENCIES
   rails (~> 6.1.3, >= 6.1.3.2)
   rexml
   rspec-rails
+  rubyzip
   sass-rails (>= 6)
   selenium-webdriver
   sinatra

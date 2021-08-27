@@ -2,6 +2,8 @@ require 'rubygems'
 require 'sinatra/base'
 require 'pg'
 require 'mustermann'
+require 'zip'
+require 'ipmo_helper'
 
 
 class IpMO < Sinatra::Base
@@ -11,6 +13,7 @@ class IpMO < Sinatra::Base
   set :static, :true
   set :raise_errors, :true
   logger = Rails.logger
+  helper = IpmoHelper.new()
 
   before '*' do
    path = request.path 
@@ -96,9 +99,11 @@ class IpMO < Sinatra::Base
   end
 
   get '/show/:slug(.:ext)?' do
+
     logger.info "** slugged with #{params} is a Hash #{params.is_a? Hash}"
     params.each{|k,v| logger.info "#{k} => #{v}"}
 
+    # create data opsHash 
     opsHash = {"key" => {},"file_name" => {},"content_type" => {}}
     
     params.each{|k,v| 
@@ -106,7 +111,6 @@ class IpMO < Sinatra::Base
       arr = k.split('.')
       hKey = arr[0]
       hCount = arr[1]
-      logger.info "ppppppppppppppppppp going to process opsHash[#{hKey}] => #{hCount}"
       if opsHash.has_key? hKey 
         then
           opsHash["#{hKey}"].store("#{hCount}",v)
@@ -114,47 +118,100 @@ class IpMO < Sinatra::Base
         next
       end
     }
-    logger.info "oooooooooooooo opsHash[ #{opsHash} ]"
+
+    # helper arrays
+    keyA = []
+    fileA = []
+    contentA = []
+    zip_data = nil
+
 
     opsHash.each{|k,v| 
       logger.info "+++++++++ opsHash[#{k}] {"
       logger.info "------------- #{v} { "
-      v.each{|k,v| 
-        logger.info " ----------------- #{k} : #{v}"
+      v.each{|kk,vv| 
+        logger.info " ----------------- #{kk} : #{vv}"
+        case k
+        when "key"
+          keyA[kk.to_i] = vv
+        when "file_name"
+          fileA[kk.to_i] = vv 
+        when "content_type"
+          contentA[kk.to_i] = vv
+        end
       }
       logger.info " .............. }"
 
       logger.info "+++++++++ } "
     }
 
-    extension = ".docx"
-    key = params['key.0']
-    content = params['content_type.0']
-    file = params['file_name.0']
-    extension = file.split('.')[2] 
 
-    begin
-      logger.info "link #{file} with #{key} from #{content}"
-      tmpfile_name = key.concat('.').concat(extension)
-      file_name_path = "#{Rails.root}/public/#{tmpfile_name}"
-      logger.info "file linked to temp file in #{file_name_path}"
-    rescue => e
-      logger.error "link file caused #{e.class} error #{e.message}"
-    end
-    
-    logger.info "going to send #{file_name_path}"
+    logger.info "keyA = #{keyA}"
+    logger.info "fileA = #{fileA}"
+    logger.info "contentA = #{contentA}"
+
+    logger.info "???????????????????????? ready to send #{keyA.size} files"
+    file_path = "#{Rails.root}/public/"
+
     begin 
-      logger.info "send file #{file_name_path} with #{file} from type #{content} 2 show"
-      send_file(
-       file_name_path,
-       filename: "#{file}",
-       disposition: 'attachment',
-       type: "#{content}"
-      )
-    rescue => e
-      logger.error "An error of type #{e.class} happened, message is #{e.message}"
-    end
+      if keyA.size == 1 then
+        key = keyA[0]
+        content = contentA[0]
+        file = fileA[0]
+        arr = file.split('.')
+        extension = arr[arr.size-1] 
+        tmpfile_name = key
+        tmpfile_name.concat('.').concat(extension)
+        file_name_path = "#{file_path}#{tmpfile_name}"
+        logger.info "*************** send file #{file_name_path} with #{file} from type #{content} 2 show"
+        send_file(file_name_path, filename: "#{file}",disposition: 'attachment',type: "#{content}")
+        FileUtils.chmod 0755, file_name_path.to_s
+      else
+        zipA = []
+       for i in 0..keyA.size-1 do
 
+        tkey = keyA[i]
+        tcontent = contentA[i]
+        tfile = fileA[i]
+        arr = tfile.split('.')
+        textension = arr[arr.size-1] 
+
+        logger.info "file_path = #{file_path} tkey = #{tkey} tfile = #{tfile}"
+
+        src = "#{file_path}"
+        logger.info "src = #{src}"
+        src.concat(tkey).concat('.').concat(textension)
+        logger.info "src.concat = #{src}"
+        dest = "#{file_path}"
+        logger.info "dest = #{dest}"
+        dest.concat(tfile)
+        logger.info "dest.concat = #{dest}"
+
+        logger.info "copying #{tfile} with #{tkey} from #{src} to #{dest}"
+
+        FileUtils.cp(src, dest)
+      
+        logger.info "!!!!!!!!!!!!!!!!!!!!!!! #{i} #{tfile} with #{tkey} from type #{tcontent} in #{textension} format will be processed"
+
+        zipA[i] = tfile 
+
+       end
+        afile = fileA[0]
+        
+        zip_name = File.basename(afile, File.extname(afile))
+        zip_name.concat(".zip")
+        logger.info "*************** send file #{file_path} with #{zip_name} from type #{content} 2 show"
+
+        zip_file = helper.get_zip_file(zipA, file_path, zip_name)
+
+        logger.info "sending #{zip_file} with #{zip_name} to browser"
+
+        send_file("#{file_path}#{zip_file}", :type => "application/zip", :filename => zip_name)
+      end
+
+    rescue => e
+      logger.error "ERROR_sendfile2show: #{e.class} : #{e.message}"
+    end
   end
 
   # route for details of a certain project
@@ -328,18 +385,100 @@ class IpMO < Sinatra::Base
     sendfile2show(file_name_path, "#{tmpfile_name}.#{tmpflie_extension}", tmpfile_extension)
   end
 
-  def sendfile2show(file_name_path, name, extension)
-    logger.info "send file #{file_name_path} with #{name} from type #{extension} 2 show"
+  def sendfile2show(opsHash)
+    keyA = []
+    fileA = []
+    contentA = []
+
+    logger.info "got ya"
+
+    opsHash.each{|k,v| 
+      logger.info "+++++++++ opsHash[#{k}] {"
+      logger.info "------------- #{v} { "
+      v.each{|kk,vv| 
+        logger.info " ----------------- #{kk} : #{vv}"
+        case k
+        when "key"
+          keyA[kk.to_i] = vv
+        when "file_name"
+          fileA[kk.to_i] = vv 
+        when "content_type"
+          contentA[kk.to_i] = vv
+        end
+      }
+      logger.info " .............. }"
+
+      logger.info "+++++++++ } "
+    }
+
+
+    logger.info "keyA = #{keyA}"
+    logger.info "fileA = #{fileA}"
+    logger.info "contentA = #{contentA}"
+
+    logger.info "???????????????????????? ready to send #{keyA.size} files"
+    file_path = "#{Rails.root}/public/"
+
     begin 
-     send_file(
-      file_name_path,
-      filename: "#{name}",
-      disposition: 'attachment',
-      type: "#{extension}"
-     )
-    FileUtils.chmod 0755, file_name_path.to_s
+      if keyA.size == 1 then
+        key = keyA[0]
+        content = contentA[0]
+        file = fileA[0]
+        arr = file.split('.')
+        extension = arr[arr.size-1] 
+      else
+        zipA = []
+       for i in 0..keyA.size-1 do
+
+        tkey = keyA[i]
+        tcontent = contentA[i]
+        tfile = fileA[i]
+        arr = file.split('.')
+        textension = arr[arr.size-1] 
+      
+        logger.info "!!!!!!!!!!!!!!!!!!!!!!! #{i} #{tfile} with #{tkey} from type #{tcontent} in #{textension} format will be processed"
+
+        zipA[i] = file_path.concat("/").concat(key).concat(".").concat(extension) 
+
+       end
+        file = fileA[0].split('.')[0]
+        file_name_path = file_path.concat('/').concat(file).concat('.zip')
+        logger.info "building zip file #{zipA[keyA.size]}"
+        zip_data = get_zip_data(zipA, file_path, zipA[keyA.size])
+
+        # build the zip file
+        #b = Ngzip::Builder.new()
+        #response.headers['X-Archive-Files'] = 'zip'
+        #b.build(zipA)
+
+        content = 'X-Archive-Files'
+      
+      end
+
+      logger.info " ################ link #{file} with #{key} from #{content}"
+      file_name_path = "#{file_path}/#{tmpfile_name}"
+      logger.info " ################ file linked to temp file in #{file_name_path}"
+
+      logger.info "*************** going to send #{file_name_path}"
+      logger.info "*************** send file #{file_name_path} with #{file} from type #{content} 2 show"
+
+      logger.error "An error of type #{e.class} happened, message is #{e.message}"
+      logger.info " ################ link #{file} with #{key} from #{content}"
+      tmpfile_name = key.concat('.').concat(extension)
+      file_name_path = "#{Rails.root}/public/#{tmpfile_name}"
+      logger.info " ################ file linked to temp file in #{file_name_path}"
+
+      logger.info "*************** going to send #{file_name_path}"
+      logger.info "*************** send file #{file_name_path} with #{file} from type #{content} 2 show"
+      send_file(
+       file_name_path,
+         filename: "#{file}",
+         disposition: 'attachment',
+         type: "#{content}"
+         )
+      FileUtils.chmod 0755, file_name_path.to_s
     rescue => e
-      logger.error "Error #{e.class} with message #{e.message} in sendfile2show occured"
+      logger.error "ERROR_sendfile2show: #{e.class} : #{e.message}"
     end
   end
 
