@@ -206,7 +206,10 @@ class IpMO < Sinatra::Base
 
         logger.info "sending #{zip_file} with #{zip_name} to browser"
 
-        send_file("#{file_path}#{zip_file}", :type => "application/zip", :filename => zip_name)
+        file = file_path
+        file.concat(zip_file)
+
+        send_file(file, :type => "application/zip", :filename => zip_name)
       end
 
     rescue => e
