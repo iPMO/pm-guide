@@ -269,6 +269,11 @@ class IpMO < Sinatra::Base
   get '/home/sinatra/code/pm-guide/public/application.css' do
     File.read(File.join('public','application.css'))
   end
+  
+  get '/glossar' do
+    file = File.join('public','PRINCE2-2017-Glossar.pdf')
+    send_file(file, :type => "application/pdf", :filename => 'Prince2 Glossar EN-DE.pdf')
+  end
 
   get /\d\.\d/ do
     erb :details,  :layout => :application
