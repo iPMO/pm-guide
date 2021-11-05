@@ -311,6 +311,14 @@ class IpMO < Sinatra::Base
     File.read(File.join('public', 'PLANS_PURPOSE.png'))
   end
   
+  get '/public/MANGEMENT_AND_TECHNICAL_STAGES.png' do
+    File.read(File.join('public', 'MANGEMENT_AND_TECHNICAL_STAGES.png'))
+  end
+  
+  get '/public/PROGRESS_BY_EXCEPTION.png' do
+    File.read(File.join('public', 'PROGRESS_BY_EXCEPTION.png'))
+  end
+  
   get '/public/hukombi_bwb.jpg' do
 	File.read(File.join('public', 'hukombi_bwb.jpg'))
   end
