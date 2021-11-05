@@ -310,6 +310,10 @@ class IpMO < Sinatra::Base
   get '/public/PLANS_PURPOSE.png' do
     File.read(File.join('public', 'PLANS_PURPOSE.png'))
   end
+  
+  get '/public/hukombi_bwb.jpg' do
+	File.read(File.join('public', 'hukombi_bwb.jpg'))
+  end
 
   # ROUTES are OVER, here comes the HELPES
   # method to list the parameter
