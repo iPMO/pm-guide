@@ -319,6 +319,26 @@ class IpMO < Sinatra::Base
     File.read(File.join('public', 'PROGRESS_BY_EXCEPTION.png'))
   end
   
+  get '/public/RISK_AND_CBJ.png' do
+    File.read(File.join('public', 'RISK_AND_CBJ.png'))
+  end
+
+  get '/public/RISK_ASSESSMENT.png' do
+    File.read(File.join('public', 'RISK_ASSESSMENT.png'))
+  end
+
+  get '/public/RISK_MANAGEMENT_PROCEDURE.png' do
+    File.read(File.join('public', 'RISK_MANAGEMENT_PROCEDURE.png'))
+  end
+  
+  get '/public/THREAT_OPPORTUNITY.png' do
+    File.read(File.join('public', 'THREAT_OPPORTUNITY.png'))
+  end
+
+  get '/public/QU_DEMMING.png' do
+    File.read(File.join('public', 'QU_DEMMING.png'))
+  end
+
   get '/public/hukombi_bwb.jpg' do
 	File.read(File.join('public', 'hukombi_bwb.jpg'))
   end
